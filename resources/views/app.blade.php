@@ -6,9 +6,11 @@
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+<!-- Refresh CSRF Token -->
+    <meta http-equiv="refresh" content="{{ config('session.lifetime') * 60 }}">
+
+    <!-- Logo -->
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png" sizes="16x16" />
 
         <!-- Scripts -->
         @routes
