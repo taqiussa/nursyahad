@@ -2,6 +2,7 @@ import React from 'react';
 import SidebarLink from '@/Components/Sia/SidebarLink';
 import { Icon } from '@mdi/react';
 import { mdiAccountCircleOutline } from '@mdi/js';
+import SidebarAdmin from './Partials/SidebarAdmin';
 export default function Sidebar({ open, closeSide, auth }) {
     return (
         <div>
@@ -24,9 +25,9 @@ export default function Sidebar({ open, closeSide, auth }) {
                     {!auth.roles.includes('Siswa') ?
                         <>
 
-                            {/* {auth.roles.includes('Admin') &&
+                            {auth.roles.includes('Admin') &&
                                 <SidebarAdmin closeSide={closeSide} />
-                            } */}
+                            }
 
                             {/* {auth.roles.includes('Bendahara') &&
                                 <SidebarBendahara closeSide={closeSide} />

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BuatRoleController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -25,9 +26,18 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+
+    // Route Buat Role
+    Route::controller(BuatRoleController::class)->group(function () {
+        Route::get('buat-role', 'index')->name('buat-role');
+        Route::post('buat-role', 'simpan')->name('buat-role.simpan');
+        Route::delete('buat-role', 'hapus')->name('buat-role.hapus');
+    });
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
 });
 
 require __DIR__ . '/auth.php';
