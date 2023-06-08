@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pengeluarans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('nis');
+            $table->string('nis', 50);
             $table->string('tahun', 30);
             $table->string('semester',2);
             $table->string('bulan', 2);

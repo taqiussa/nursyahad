@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('santri_boyongs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('nis');
+            $table->string('nis', 50);
             $table->foreignId('kelas_id');
             $table->string('tahun', 30);
             $table->timestamps();

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('biodatas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('nis');
+            $table->string('nis', 50);
             $table->string('nisn')->nullable();
             $table->string('nik', 50)->nullable();
             $table->string('jenis_kelamin', 1)->nullable();

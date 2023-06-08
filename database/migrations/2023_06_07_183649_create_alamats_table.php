@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('alamats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('nis');
+            $table->string('nis', 50);
             $table->string('alamat_lengkap')->nullable();
             $table->string('rt')->nullable();
             $table->string('rw')->nullable();

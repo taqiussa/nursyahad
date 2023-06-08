@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BuatRoleController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UploadSiswaController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -25,7 +26,10 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware([
+    'auth',
+    'role:Admin'
+    ])->group(function () {
 
     // Route Buat Role
     Route::controller(BuatRoleController::class)->group(function () {
@@ -33,6 +37,19 @@ Route::middleware('auth')->group(function () {
         Route::post('buat-role', 'simpan')->name('buat-role.simpan');
         Route::delete('buat-role', 'hapus')->name('buat-role.hapus');
     });
+
+    // Route Upload Siswa
+    Route::controller(UploadSiswaController::class)->group(function () {
+        Route::get('upload-siswa', 'index')->name('upload-siswa');
+        Route::post('upload-siswa', 'upload')->name('upload-siswa.upload');
+    });
+
+});
+
+Route::middleware([
+    'auth',
+    'role:Admin|Bendahara|Guru|Karyawan|Kepala Sekolah|Kesiswaan|Kurikulum|Tata Usaha'
+    ])->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
