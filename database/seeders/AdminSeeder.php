@@ -14,9 +14,20 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         Role::create(['name' => 'Admin', 'guard_name' => 'web']);
+
+        $data = [
+            ['nama' => '1', 'tingkat' => 1],
+            ['nama' => '2', 'tingkat' => 2],
+            ['nama' => '3', 'tingkat' => 3],
+            ['nama' => '4', 'tingkat' => 4],
+            ['nama' => '5', 'tingkat' => 5],
+            ['nama' => '6', 'tingkat' => 6],
+            ['nama' => '3 - Inklusi', 'tingkat' => 3],
+        ];
+
         $user = User::create([
-            'name' => 'administrator',
-            'username' => 'administrator',
+            'name' => 'Administrator',
+            'username' => 'admin',
             'password' => bcrypt('asdfasdf'),
         ]);
 
