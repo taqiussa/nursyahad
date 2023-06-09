@@ -3,7 +3,6 @@
 use App\Http\Controllers\BuatRoleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UploadSiswaController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
