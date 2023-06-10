@@ -14,7 +14,7 @@ class TambahSiswaController extends Controller
 {
     public function index()
     {
-        return inertia('Guru/TambahSiswa');
+        return inertia('TataUsaha/TambahSiswa');
     }
 
     public function edit()
@@ -33,7 +33,7 @@ class TambahSiswaController extends Controller
         $kabupaten = Kabupaten::whereName($siswa->alamat->kabupaten)->first()->code;
         $provinsi = Provinsi::whereName($siswa->alamat->provinsi)->first()->code;
 
-        return inertia('Guru/EditSiswa', [
+        return inertia('TataUsaha/EditSiswa', [
             'siswa' => $siswa,
             'desa' => $desa,
             'kecamatan' => $kecamatan,
