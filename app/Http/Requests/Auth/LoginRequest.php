@@ -42,14 +42,15 @@ class LoginRequest extends FormRequest
         $this->ensureIsNotRateLimited();
 
         $credentials = [
-            'password' => $this->input('password')
+            'password' => $this->input('password'),
+            'username' => $this->input('username')
         ];
 
-        if (is_numeric($this->input('username'))) {
-            $credentials['nis'] = $this->input('username');
-        } else {
-            $credentials['username'] = $this->input('username');
-        }
+        // if (is_numeric($this->input('username'))) {
+        //     $credentials['nis'] = $this->input('username');
+        // } else {
+        //     $credentials['username'] = $this->input('username');
+        // }
 
         if (!Auth::attempt($credentials, $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
