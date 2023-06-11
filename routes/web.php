@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\BuatRoleController;
+use App\Http\Controllers\DataSiswaController;
+use App\Http\Controllers\GetDataSiswaController;
 use App\Http\Controllers\GetDataWilayahController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TambahSiswaController;
@@ -24,6 +26,11 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function() {
+
+    // Route Get Data Siswa 
+    Route::controller(GetDataSiswaController::class)->group(function () {
+        Route::post('get-all-siswa', 'get_all_siswa')->name('get-all-siswa');
+    });
 
     // Route Get Data Wilayah
     Route::controller(GetDataWilayahController::class)->group(function() {
@@ -61,15 +68,18 @@ Route::middleware([
     'role:Admin|Bendahara|Guru|Karyawan|Kepala Sekolah|Kesiswaan|Kurikulum|Tata Usaha'
 ])->group(function () {
 
+    // Route Data Siswa
+    Route::get('data-siswa', DataSiswaController::class)->name('data-siswa');
+
     // Route Tambah Siswa
     Route::controller(TambahSiswaController::class)->group(function () {
         Route::get('tambah-siswa', 'index')->name('tambah-siswa');
-        Route::post('tambah-siswa/simpan', 'simpan')->name('tambah-siswa.simpan');
-        Route::delete('tambah-siswa/{id}', 'hapus')->name('tambah-siswa.hapus');
+        Route::post('tambah-siswa', 'simpan')->name('tambah-siswa.simpan');
+        Route::delete('tambah-siswa', 'hapus')->name('tambah-siswa.hapus');
 
         // Route Edit Siswa
         Route::get('tambah-siswa/edit', 'edit')->name('tambah-siswa.edit');
-        Route::post('tamba-siswa/update', 'update')->name('tambah-siswa.update');
+        Route::post('tambah-siswa/update', 'update')->name('tambah-siswa.update');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

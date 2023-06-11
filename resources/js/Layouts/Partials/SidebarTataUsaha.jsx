@@ -8,6 +8,7 @@ const SidebarTataUsaha = ({ closeSide }) => {
                 Tata Usaha
             </div>
             <div>
+                <SidebarLink closeSide={closeSide} href={route('data-siswa')} active={route().current('data-siswa')} label='data siswa' />
                 <SidebarLink closeSide={closeSide} href={route('tambah-siswa')} active={route().current('tambah-siswa')} label='tambah siswa' />
             </div>
         </div>

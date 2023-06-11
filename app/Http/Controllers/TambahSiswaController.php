@@ -12,6 +12,7 @@ use App\Models\Kelas;
 use App\Models\Provinsi;
 use App\Models\Siswa;
 use App\Traits\InitTrait;
+use Illuminate\Support\Facades\Storage;
 
 class TambahSiswaController extends Controller
 {
@@ -37,10 +38,15 @@ class TambahSiswaController extends Controller
             )
             ->first();
 
-        $desa = Desa::whereName($siswa->alamat->desa)->first()->code;
-        $kecamatan = Kecamatan::whereName($siswa->alamat->kecamatan)->first()->code;
-        $kabupaten = Kabupaten::whereName($siswa->alamat->kabupaten)->first()->code;
-        $provinsi = Provinsi::whereName($siswa->alamat->provinsi)->first()->code;
+        $listProvinsi = Provinsi::orderBy('name')->get();
+        $provinsi = $listProvinsi->where('name', $siswa->alamat?->provinsi)->first()?->code;
+        $listKabupaten = Kabupaten::whereProvinceCode($provinsi)->orderBy('name')->get();
+        $kabupaten = $listKabupaten->where('name', $siswa->alamat?->kabupaten)->first()?->code;
+        $listKecamatan = Kecamatan::whereCityCode($kabupaten)->orderBy('name')->get();
+        $kecamatan = $listKecamatan->where('name', $siswa->alamat?->kecamatan)->first()?->code;
+        $listDesa = Desa::whereDistrictCode($kecamatan)->orderBy('name')->get();
+        $desa = $listDesa->where('name', $siswa->alamat?->desa)->first()?->code;
+
 
         return inertia('TataUsaha/EditSiswa', [
             'siswa' => $siswa,
@@ -48,6 +54,10 @@ class TambahSiswaController extends Controller
             'kecamatan' => $kecamatan,
             'kabupaten' => $kabupaten,
             'provinsi' => $provinsi,
+            'listProvinsi' => $listProvinsi,
+            'initListKabupaten' => $listKabupaten,
+            'initListKecamatan' => $listKecamatan,
+            'initListDesa' => $listDesa,
         ]);
     }
 
@@ -81,6 +91,7 @@ class TambahSiswaController extends Controller
                 'name' => request('nama'),
                 'nis' => request('nis'),
                 'username' => request('nis'),
+                'jenis_kelamin' => request('jenisKelamin'),
                 'foto' => $imageName ?? '',
                 'password' => bcrypt('12345678')
             ]);
@@ -129,11 +140,11 @@ class TambahSiswaController extends Controller
     public function update()
     {
         request()->validate([
-            'name' => 'required',
+            'nama' => 'required',
             'jenisKelamin' => 'required',
         ]);
 
-        $user = User::find(request('id'));
+        $user = User::whereNis(request('nis'))->first();
 
         $user->biodata()->updateOrCreate(
             [],
@@ -176,12 +187,27 @@ class TambahSiswaController extends Controller
             $image->move(storage_path('app/public/foto'), $imageName);
         }
 
-        $user->update([
-            'name' => request('nama'),
-            'nis' => request('nis'),
-            'username' => request('nis'),
-            'foto' => $imageName ?? '',
-        ]);
+        $imageName ?
+            Storage::delete('public/foto/' . $user->foto)
+            :
+            null;
+
+
+        $imageName ?
+            $user->update([
+                'name' => request('nama'),
+                'jenis_kelamin' => request('jenisKelamin'),
+                'nis' => request('nis'),
+                'username' => request('nis'),
+                'foto' => $imageName
+            ])
+            :
+            $user->update([
+                'name' => request('nama'),
+                'jenis_kelamin' => request('jenisKelamin'),
+                'nis' => request('nis'),
+                'username' => request('nis'),
+            ]);
 
         return to_route('data-siswa');
     }

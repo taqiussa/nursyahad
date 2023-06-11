@@ -11,7 +11,7 @@ const UploadSiswa = () => {
         fileUpload: ''
     })
 
-    const onHandleChange = (e) => {
+    const handleChange = (e) => {
         setData(e.target.name, e.target.type === 'file' ? e.target.files[0] : e.target.value)
     }
 
@@ -36,7 +36,7 @@ const UploadSiswa = () => {
                     name='fileUpload'
                     label='untuk diupload'
                     message={errors.fileUpload}
-                    handleChange={onHandleChange}
+                    onChange={handleChange}
                 />
                 <div className='lg:flex lg:items-end'>
                     <PrimaryButton onClick={submit} children='upload' disabled={processing} />
