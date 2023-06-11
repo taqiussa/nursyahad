@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BuatRoleController;
+use App\Http\Controllers\GetDataWilayahController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TambahSiswaController;
 use App\Http\Controllers\UploadSiswaController;
@@ -20,6 +21,16 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return inertia('Auth/Login');
+});
+
+Route::middleware(['auth'])->group(function() {
+
+    // Route Get Data Wilayah
+    Route::controller(GetDataWilayahController::class)->group(function() {
+        Route::post('get-desa', 'desa')->name('get-desa');
+        Route::post('get-kabupaten', 'kabupaten')->name('get-kabupaten');
+        Route::post('get-kecamatan', 'kecamatan')->name('get-kecamatan');
+    });
 });
 
 Route::get('/dashboard', function () {

@@ -1,12 +1,11 @@
 import axios from "axios"
 
-const getSiswaWithSkor = async (tahun, kelasId) => {
+const getKecamatan = async (kabupaten) => {
     try {
         const response = await axios.post(
-            route('get-siswa-with-skor',
+            route('get-kecamatan',
                 {
-                    tahun: tahun,
-                    kelasId: kelasId
+                    kabupaten: kabupaten
                 })
         )
         return response.data;
@@ -16,4 +15,4 @@ const getSiswaWithSkor = async (tahun, kelasId) => {
     }
 }
 
-export default getSiswaWithSkor
+export default getKecamatan

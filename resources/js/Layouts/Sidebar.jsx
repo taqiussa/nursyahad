@@ -3,6 +3,7 @@ import SidebarLink from '@/Components/Sia/SidebarLink';
 import { Icon } from '@mdi/react';
 import { mdiAccountCircleOutline } from '@mdi/js';
 import SidebarAdmin from './Partials/SidebarAdmin';
+import SidebarTataUsaha from './Partials/SidebarTataUsaha';
 export default function Sidebar({ open, closeSide, auth }) {
     return (
         <div>
@@ -28,6 +29,8 @@ export default function Sidebar({ open, closeSide, auth }) {
                             {auth.roles.includes('Admin') &&
                                 <SidebarAdmin closeSide={closeSide} />
                             }
+
+                            <SidebarTataUsaha closeSide={closeSide} />
 
                             {/* {auth.roles.includes('Bendahara') &&
                                 <SidebarBendahara closeSide={closeSide} />

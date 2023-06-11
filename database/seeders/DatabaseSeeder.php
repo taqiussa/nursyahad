@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             AdminSeeder::class,
-            CitiesSeeder::class,
             ProvincesSeeder::class,
+            CitiesSeeder::class,
             DistrictsSeeder::class,
             VillagesSeeder::class
         ]);

@@ -8,7 +8,7 @@ const SidebarTataUsaha = ({ closeSide }) => {
                 Tata Usaha
             </div>
             <div>
-                <SidebarLink closeSide={closeSide} href={route('download-qr-code')} active={route().current('download-qr-code')} label='download qr code' />
+                <SidebarLink closeSide={closeSide} href={route('tambah-siswa')} active={route().current('tambah-siswa')} label='tambah siswa' />
             </div>
         </div>
     )

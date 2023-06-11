@@ -1,11 +1,11 @@
 import axios from "axios"
 
-const getPermintaanBadal = async (tanggal) => {
+const getKabupaten = async (provinsi) => {
     try {
         const response = await axios.post(
-            route('get-permintaan-badal',
+            route('get-kabupaten',
                 {
-                    tanggal: tanggal
+                    provinsi: provinsi
                 })
         )
         return response.data;
@@ -15,4 +15,4 @@ const getPermintaanBadal = async (tanggal) => {
     }
 }
 
-export default getPermintaanBadal
+export default getKabupaten

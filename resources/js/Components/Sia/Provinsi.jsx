@@ -1,6 +1,6 @@
 import { forwardRef, useEffect, useRef } from 'react';
 
-export default forwardRef(function FileUpload({ type = 'file', className = '', isFocused = false, label, message, ...props }, ref) {
+export default forwardRef(function Provinsi({ type = 'text', className = '', isFocused = false, message, listProvinsi, ...props }, ref) {
     const input = ref ? ref : useRef();
 
     useEffect(() => {
@@ -12,19 +12,25 @@ export default forwardRef(function FileUpload({ type = 'file', className = '', i
     return (
         <div className='flex flex-col text-slate-600 capitalize'>
             <div>
-                Pilih File {label}
+                provinsi
             </div>
             <div>
-                <input
+                <select
                     {...props}
-                    type={type}
                     className={
-                        `border-gray-300 focus:border-emerald-500 focus:ring-emerald-500 rounded-md shadow-sm w-auto ` +
+                        `border-gray-300 capitalize focus:border-emerald-500 focus:ring-emerald-500 rounded-md shadow-sm w-full ` +
                         className
                     }
                     ref={input}
-                />
+                >
 
+                    <option value="">pilih provinsi</option>
+
+                    {listProvinsi.map((provinsi, index) => (
+                        <option key={index} value={provinsi.code}>{provinsi.name}</option>
+                    ))}
+
+                </select>
             </div>
             {message ?
                 <div className='text-sm text-red-600'>

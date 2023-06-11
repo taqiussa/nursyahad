@@ -14,7 +14,7 @@ class TambahSiswaController extends Controller
 {
     public function index()
     {
-        return inertia('TataUsaha/TambahSiswa');
+        return inertia('TataUsaha/TambahSiswa', ['listProvinsi' => Provinsi::orderBy('name')->get()]);
     }
 
     public function edit()
@@ -68,10 +68,10 @@ class TambahSiswaController extends Controller
             'nama_ibu' => request('namaIbu'),
         ]);
 
-        $desa = Desa::find(request('desa'))->name;
-        $kecamatan = Kecamatan::find(request('kecamatan'))->name;
-        $kabupaten = Kabupaten::find(request('kabupaten'))->name;
-        $provinsi = Provinsi::find(request('provinsi'))->name;
+        $desa = Desa::whereCode(request('desa'))->name;
+        $kecamatan = Kecamatan::whereCode(request('kecamatan'))->name;
+        $kabupaten = Kabupaten::whereCode(request('kabupaten'))->name;
+        $provinsi = Provinsi::whereCode(request('provinsi'))->name;
 
         Alamat::create([
             'nis' => request('nis'),
