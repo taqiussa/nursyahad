@@ -1,21 +1,12 @@
 import { forwardRef, useEffect, useRef } from 'react';
 
-export default forwardRef(function JenisKelamin(
-    { name, id, value, message, className, required, isFocused, handleChange },
-    ref
-) {
-
+export default forwardRef(function JenisKelamin({ className = '', isFocused = false, message, disabled, ...props }, ref) {
     const input = ref ? ref : useRef();
 
     useEffect(() => {
-
         if (isFocused) {
-
             input.current.focus();
-
         }
-
-
     }, []);
 
     return (
@@ -25,16 +16,13 @@ export default forwardRef(function JenisKelamin(
             </div>
             <div>
                 <select
-                    name={name}
-                    id={id}
-                    value={value}
+                    {...props}
                     className={
                         `border-gray-300 focus:border-emerald-500 focus:ring-emerald-500 rounded-md shadow-sm w-full ` +
                         className
                     }
                     ref={input}
-                    required={required}
-                    onChange={(e) => handleChange(e)}>
+                >
 
                     <option value="">Pilih Jenis Kelamin</option>
 

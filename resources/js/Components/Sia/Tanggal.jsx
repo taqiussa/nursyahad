@@ -1,9 +1,6 @@
 import { forwardRef, useEffect, useRef } from 'react';
 
-export default forwardRef(function Tanggal(
-    { name, id, value, message, className, required, isFocused, handleChange, label  },
-    ref
-) {
+export default forwardRef(function Tanggal({ className = '', isFocused = false, label, message, ...props }, ref) {
     const input = ref ? ref : useRef();
 
     useEffect(() => {
@@ -21,17 +18,13 @@ export default forwardRef(function Tanggal(
 
             <div>
                 <input
-                    type="date"
-                    name={name}
-                    id={id}
-                    value={value}
+                    {...props}
+                    type='date'
                     className={
                         `border-gray-300 focus:border-emerald-500 focus:ring-emerald-500 rounded-md shadow-sm w-full ` +
                         className
                     }
                     ref={input}
-                    required={required}
-                    onChange={(e) => handleChange(e)}
                 />
             </div>
             {message ?

@@ -14,12 +14,15 @@ import Desa from '@/Components/Sia/Desa'
 import JenisKelamin from '@/Components/Sia/JenisKelamin'
 import Tanggal from '@/Components/Sia/Tanggal'
 import FileUpload from '@/Components/Sia/FileUpload'
+import PrimaryButton from '@/Components/PrimaryButton'
+import { toast } from 'react-toastify'
 
 const TambahSiswa = ({ listProvinsi }) => {
 
     const { data, setData, post, errors, processing } = useForm({
         nama: '',
         nis: '',
+        nisn: '',
         jenisKelamin: '',
         nik: '',
         tempatLahir: '',
@@ -38,8 +41,20 @@ const TambahSiswa = ({ listProvinsi }) => {
         listKabupaten: [],
     })
 
-    const onHandleChange = (event) => {
-        setData(event.target.name, event.target.type === 'file' ? event.target.files[0] : event.target.value);
+    const handleChange = (e) => {
+        setData(e.target.name, e.target.type === 'file' ? e.target.files[0] : e.target.value);
+    }
+
+    const submit = (e) => {
+        e.preventDefault()
+
+        post(route('tambah-siswa.simpan'),
+            {
+                onSuccess: () => {
+                    toast.success('Berhasil Tambah Siswa')
+                    setData({ ...data })
+                }
+            })
     }
 
     async function getDataKabupaten() {
@@ -96,7 +111,7 @@ const TambahSiswa = ({ listProvinsi }) => {
         <>
             <Head title='Tambah Siswa' />
             <div className="bg-emerald-200 border-b-2 border-emerald-500 text-center text-slate-600 text-lg font-bold uppercase mb-2">tambah siswa</div>
-            <div className="lg:grid lg:grid-cols-4 lg:gap-2 lg:space-y-0 space-y-3">
+            <div className="lg:grid lg:grid-cols-4 lg:gap-2 lg:space-y-0 space-y-3 mb-3">
                 <InputText
                     name='nama'
                     label='nama'
@@ -104,11 +119,20 @@ const TambahSiswa = ({ listProvinsi }) => {
                     message={errors.nama}
                     onChange={handleChange}
                 />
+
                 <InputText
                     name='nis'
-                    label='nis'
+                    label='NIS'
                     value={data.nis}
                     message={errors.nis}
+                    onChange={handleChange}
+                />
+
+                <InputText
+                    name='nisn'
+                    label='NISN'
+                    value={data.nisn}
+                    message={errors.nisn}
                     onChange={handleChange}
                 />
 
@@ -122,7 +146,7 @@ const TambahSiswa = ({ listProvinsi }) => {
 
                 <InputText
                     name='nik'
-                    label='nik'
+                    label='NIK'
                     value={data.nik}
                     message={errors.nik}
                     onChange={handleChange}
@@ -226,6 +250,12 @@ const TambahSiswa = ({ listProvinsi }) => {
                 />
 
             </div>
+            
+            <PrimaryButton
+                children='simpan'
+                onClick={submit}
+                disabled={processing}
+            />
         </>
     )
 }

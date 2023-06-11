@@ -44,14 +44,22 @@ class TambahSiswaController extends Controller
 
     public function simpan()
     {
-        request()->validate([
-            'name' => 'required',
-            'nis' => 'required|unique:users,nis',
-            'jenisKelamin' => 'required',
-        ]);
+        request()->validate(
+            [
+                'nama' => 'required',
+                'nis' => 'required|unique:users,nis',
+                'jenisKelamin' => 'required',
+            ],
+            [
+                'name.required' => 'Isi Nama',
+                'jenisKelamin.required' => 'Pilih Jenis Kelamin',
+                'nis.required' => 'Isi NIS',
+                'nis.unique' => 'NIS Sudah Dipakai',
+            ]
+        );
 
         User::create([
-            'name' => request('name'),
+            'name' => request('nama'),
             'nis' => request('nis'),
             'password' => bcrypt('12345678')
         ]);
@@ -63,15 +71,14 @@ class TambahSiswaController extends Controller
             'jenis_kelamin' => request('jenisKelamin'),
             'tempat_lahir' => request('tempatLahir'),
             'tanggal_lahir' => request('tanggalLahir'),
-            'asal_sekolah' => request('asalSekolah'),
             'nama_ayah' => request('namaAyah'),
             'nama_ibu' => request('namaIbu'),
         ]);
 
-        $desa = Desa::whereCode(request('desa'))->name;
-        $kecamatan = Kecamatan::whereCode(request('kecamatan'))->name;
-        $kabupaten = Kabupaten::whereCode(request('kabupaten'))->name;
-        $provinsi = Provinsi::whereCode(request('provinsi'))->name;
+        $desa = Desa::whereCode(request('desa'))->first()?->name;
+        $kecamatan = Kecamatan::whereCode(request('kecamatan'))->first()?->name;
+        $kabupaten = Kabupaten::whereCode(request('kabupaten'))->first()?->name;
+        $provinsi = Provinsi::whereCode(request('provinsi'))->first()?->name;
 
         Alamat::create([
             'nis' => request('nis'),
@@ -109,10 +116,10 @@ class TambahSiswaController extends Controller
             ]
         );
 
-        $desa = Desa::find(request('desa'))->name;
-        $kecamatan = Kecamatan::find(request('kecamatan'))->name;
-        $kabupaten = Kabupaten::find(request('kabupaten'))->name;
-        $provinsi = Provinsi::find(request('provinsi'))->name;
+        $desa = Desa::whereCode(request('desa'))->first()?->name;
+        $kecamatan = Kecamatan::whereCode(request('kecamatan'))->first()?->name;
+        $kabupaten = Kabupaten::whereCode(request('kabupaten'))->first()?->name;
+        $provinsi = Provinsi::whereCode(request('provinsi'))->first()?->name;
 
         $user->alamat()->updateOrCreate(
             [],
@@ -129,7 +136,7 @@ class TambahSiswaController extends Controller
         );
 
         $user->update([
-            'name' => request('name'),
+            'name' => request('nama'),
             'nis' => request('nis'),
         ]);
 
