@@ -8,13 +8,22 @@ use App\Models\Biodata;
 use App\Models\Desa;
 use App\Models\Kabupaten;
 use App\Models\Kecamatan;
+use App\Models\Kelas;
 use App\Models\Provinsi;
+use App\Models\Siswa;
+use App\Traits\InitTrait;
 
 class TambahSiswaController extends Controller
 {
+    use InitTrait;
+
     public function index()
     {
-        return inertia('TataUsaha/TambahSiswa', ['listProvinsi' => Provinsi::orderBy('name')->get()]);
+        return inertia('TataUsaha/TambahSiswa', [
+            'initTahun' => $this->data_tahun(),
+            'listProvinsi' => Provinsi::orderBy('name')->get(),
+            'listKelas' => Kelas::orderBy('nama')->get()
+        ]);
     }
 
     public function edit()
@@ -58,40 +67,64 @@ class TambahSiswaController extends Controller
             ]
         );
 
-        User::create([
-            'name' => request('nama'),
-            'nis' => request('nis'),
-            'password' => bcrypt('12345678')
-        ]);
+        try {
 
-        Biodata::create([
-            'nis' => request('nis'),
-            'nisn' => request('nisn'),
-            'nik' => request('nik'),
-            'jenis_kelamin' => request('jenisKelamin'),
-            'tempat_lahir' => request('tempatLahir'),
-            'tanggal_lahir' => request('tanggalLahir'),
-            'nama_ayah' => request('namaAyah'),
-            'nama_ibu' => request('namaIbu'),
-        ]);
+            $imageName = null;
 
-        $desa = Desa::whereCode(request('desa'))->first()?->name;
-        $kecamatan = Kecamatan::whereCode(request('kecamatan'))->first()?->name;
-        $kabupaten = Kabupaten::whereCode(request('kabupaten'))->first()?->name;
-        $provinsi = Provinsi::whereCode(request('provinsi'))->first()?->name;
+            if (request()->hasFile('foto')) {
+                $image = request()->file('foto');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(storage_path('app/public/foto'), $imageName);
+            }
 
-        Alamat::create([
-            'nis' => request('nis'),
-            'alamat_lengkap' => request('alamatLengkap'),
-            'rt' => request('rt'),
-            'rw' => request('rw'),
-            'desa' => $desa,
-            'kecamatan' => $kecamatan,
-            'kabupaten' => $kabupaten,
-            'provinsi' => $provinsi,
-        ]);
+            User::create([
+                'name' => request('nama'),
+                'nis' => request('nis'),
+                'username' => request('nis'),
+                'foto' => $imageName ?? '',
+                'password' => bcrypt('12345678')
+            ]);
 
-        return to_route('tambah-siswa');
+            Biodata::create([
+                'nis' => request('nis'),
+                'nisn' => request('nisn'),
+                'nik' => request('nik'),
+                'jenis_kelamin' => request('jenisKelamin'),
+                'tempat_lahir' => request('tempatLahir'),
+                'tanggal_lahir' => request('tanggalLahir'),
+                'nama_ayah' => request('namaAyah'),
+                'nama_ibu' => request('namaIbu'),
+            ]);
+
+            $desa = Desa::whereCode(request('desa'))->first()?->name;
+            $kecamatan = Kecamatan::whereCode(request('kecamatan'))->first()?->name;
+            $kabupaten = Kabupaten::whereCode(request('kabupaten'))->first()?->name;
+            $provinsi = Provinsi::whereCode(request('provinsi'))->first()?->name;
+
+            Alamat::create([
+                'nis' => request('nis'),
+                'alamat_lengkap' => request('alamatLengkap'),
+                'rt' => request('rt'),
+                'rw' => request('rw'),
+                'desa' => $desa,
+                'kecamatan' => $kecamatan,
+                'kabupaten' => $kabupaten,
+                'provinsi' => $provinsi,
+            ]);
+
+            $kelas = Kelas::find(request('kelasId'));
+
+            Siswa::create([
+                'nis' => request('nis'),
+                'tahun' => request('tahun'),
+                'kelas_id' => request('kelasId'),
+                'tingkat' => $kelas->tingkat,
+            ]);
+
+            return to_route('tambah-siswa');
+        } catch (\Throwable $th) {
+            return back()->withErrors($th);
+        }
     }
     public function update()
     {
@@ -135,9 +168,19 @@ class TambahSiswaController extends Controller
             ]
         );
 
+        $imageName = null;
+
+        if (request()->hasFile('foto')) {
+            $image = request()->file('foto');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(storage_path('app/public/foto'), $imageName);
+        }
+
         $user->update([
             'name' => request('nama'),
             'nis' => request('nis'),
+            'username' => request('nis'),
+            'foto' => $imageName ?? '',
         ]);
 
         return to_route('data-siswa');

@@ -25,6 +25,7 @@ class User extends Authenticatable
         'username',
         'nis',
         'jenis_kelamin',
+        'foto',
         'password',
     ];
 

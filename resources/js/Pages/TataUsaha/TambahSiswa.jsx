@@ -16,8 +16,10 @@ import Tanggal from '@/Components/Sia/Tanggal'
 import FileUpload from '@/Components/Sia/FileUpload'
 import PrimaryButton from '@/Components/PrimaryButton'
 import { toast } from 'react-toastify'
+import Kelas from '@/Components/Sia/Kelas'
+import Tahun from '@/Components/Sia/Tahun'
 
-const TambahSiswa = ({ listProvinsi }) => {
+const TambahSiswa = ({ initTahun, listProvinsi, listKelas }) => {
 
     const { data, setData, post, errors, processing } = useForm({
         nama: '',
@@ -36,6 +38,8 @@ const TambahSiswa = ({ listProvinsi }) => {
         kecamatan: '',
         kabupaten: '',
         provinsi: '',
+        tahun: initTahun,
+        kelasId: '',
         listDesa: [],
         listKecamatan: [],
         listKabupaten: [],
@@ -242,6 +246,21 @@ const TambahSiswa = ({ listProvinsi }) => {
                     listDesa={data.listDesa}
                 />
 
+                <Kelas
+                    name='kelasId'
+                    value={data.kelasId}
+                    message={errors.kelasId}
+                    onChange={handleChange}
+                    listKelas={listKelas}
+                />
+
+                <Tahun
+                    name='tahun'
+                    value={data.tahun}
+                    message={errors.tahun}
+                    onChange={handleChange}
+                />
+
                 <FileUpload
                     name='foto'
                     label='foto jika ada'
@@ -250,7 +269,7 @@ const TambahSiswa = ({ listProvinsi }) => {
                 />
 
             </div>
-            
+
             <PrimaryButton
                 children='simpan'
                 onClick={submit}

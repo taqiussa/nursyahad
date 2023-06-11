@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('username', 50)->nullable();
             $table->string('nis', 50)->nullable();
             $table->string('jenis_kelamins', 1)->nullable();
+            $table->string('foto')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
