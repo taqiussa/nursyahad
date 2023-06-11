@@ -1,20 +1,12 @@
 import { forwardRef, useEffect, useRef } from 'react';
 
-export default forwardRef(function Tingkat(
-    { name, id, value, message, className, required, isFocused, handleChange, disabled },
-    ref
-) {
-
+export default forwardRef(function Tingkat({ className = '', isFocused = false, message, ...props }, ref) {
     const input = ref ? ref : useRef();
 
     useEffect(() => {
-
         if (isFocused) {
-
             input.current.focus();
-
         }
-
     }, []);
 
     return (
@@ -24,24 +16,21 @@ export default forwardRef(function Tingkat(
             </div>
             <div>
                 <select
-                    name={name}
-                    id={id}
-                    value={value}
+                    {...props}
                     className={
-                        `border-gray-300  focus:border-emerald-500 focus:ring-emerald-500 rounded-md shadow-sm w-full ${disabled && 'bg-slate-200'
-                        } ` +
+                        `border-gray-300  focus:border-emerald-500 focus:ring-emerald-500 rounded-md shadow-sm w-full  ` +
                         className
                     }
                     ref={input}
-                    required={required}
-                    onChange={(e) => handleChange(e)}
-                    disabled={disabled}
                 >
 
                     <option value="">Pilih Tingkat</option>
-                    <option value='7'>7</option>
-                    <option value='8'>8</option>
-                    <option value='9'>9</option>
+                    <option value='1'>1</option>
+                    <option value='2'>2</option>
+                    <option value='3'>3</option>
+                    <option value='4'>4</option>
+                    <option value='5'>5</option>
+                    <option value='6'>6</option>
 
                 </select>
             </div>

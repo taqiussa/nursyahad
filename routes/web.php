@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\BuatRoleController;
+use App\Http\Controllers\DataKelasController;
 use App\Http\Controllers\DataSiswaController;
 use App\Http\Controllers\GetDataSiswaController;
 use App\Http\Controllers\GetDataWilayahController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TambahKelasController;
 use App\Http\Controllers\TambahSiswaController;
 use App\Http\Controllers\UploadSiswaController;
 use Illuminate\Support\Facades\Route;
@@ -68,8 +70,20 @@ Route::middleware([
     'role:Admin|Bendahara|Guru|Karyawan|Kepala Sekolah|Kesiswaan|Kurikulum|Tata Usaha'
 ])->group(function () {
 
+    // Route Data Kelas
+    Route::controller(DataKelasController::class)->group(function() {
+        Route::get('data-kelas', 'index')->name('data-kelas');
+        Route::delete('data-kelas', 'hapus')->name('data-kelas.hapus');
+    });
+
     // Route Data Siswa
     Route::get('data-siswa', DataSiswaController::class)->name('data-siswa');
+
+    // Route Tambah Kelas
+    Route::controller(TambahKelasController::class)->group(function () {
+        Route::get('tambah-kelas', 'index')->name('tambah-kelas');
+        Route::post('tambah-kelas', 'simpan')->name('tambah-kelas.simpan');
+    });
 
     // Route Tambah Siswa
     Route::controller(TambahSiswaController::class)->group(function () {
