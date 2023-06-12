@@ -5,6 +5,8 @@ use App\Http\Controllers\DataKelasController;
 use App\Http\Controllers\DataSiswaController;
 use App\Http\Controllers\GetDataSiswaController;
 use App\Http\Controllers\GetDataWilayahController;
+use App\Http\Controllers\InputPengeluaranSiswaController;
+use App\Http\Controllers\InputUangSakuController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TambahKelasController;
 use App\Http\Controllers\TambahSiswaController;
@@ -27,7 +29,7 @@ Route::get('/', function () {
     return inertia('Auth/Login');
 });
 
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['auth'])->group(function () {
 
     // Route Get Data Siswa 
     Route::controller(GetDataSiswaController::class)->group(function () {
@@ -35,7 +37,7 @@ Route::middleware(['auth'])->group(function() {
     });
 
     // Route Get Data Wilayah
-    Route::controller(GetDataWilayahController::class)->group(function() {
+    Route::controller(GetDataWilayahController::class)->group(function () {
         Route::post('get-desa', 'desa')->name('get-desa');
         Route::post('get-kabupaten', 'kabupaten')->name('get-kabupaten');
         Route::post('get-kecamatan', 'kecamatan')->name('get-kecamatan');
@@ -71,13 +73,27 @@ Route::middleware([
 ])->group(function () {
 
     // Route Data Kelas
-    Route::controller(DataKelasController::class)->group(function() {
+    Route::controller(DataKelasController::class)->group(function () {
         Route::get('data-kelas', 'index')->name('data-kelas');
         Route::delete('data-kelas', 'hapus')->name('data-kelas.hapus');
     });
 
     // Route Data Siswa
     Route::get('data-siswa', DataSiswaController::class)->name('data-siswa');
+
+    // Route Input Pengeluaran Siswa
+    Route::controller(InputPengeluaranSiswaController::class)->group(function () {
+        Route::get('input-pengeluaran-siswa', 'index')->name('input-pengeluaran-siswa');
+        Route::post('input-pengeluaran-siswa', 'simpan')->name('input-pengeluaran-siswa.simpan');
+        Route::delete('input-pengeluaran-siswa', 'hapus')->name('input-pengeluaran-siswa.hapus');
+    });
+
+    // Route Input Uang Saku
+    Route::controller(InputUangSakuController::class)->group(function () {
+        Route::get('input-uang-saku', 'index')->name('input-uang-saku');
+        Route::post('input-uang-saku', 'simpan')->name('input-uang-saku.simpan');
+        Route::delete('input-uang-saku', 'hapus')->name('input-uang-saku.hapus');
+    });
 
     // Route Tambah Kelas
     Route::controller(TambahKelasController::class)->group(function () {

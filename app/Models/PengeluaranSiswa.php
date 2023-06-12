@@ -6,28 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Pengeluaran extends Model
+class PengeluaranSiswa extends Model
 {
     use HasFactory;
     protected $guarded = [];
 
     /**
-     * Get the guru that owns the Pengeluaran
+     * Get the siswa that owns the PemasukanSiswa
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function guru(): BelongsTo
+    public function siswa(): BelongsTo
     {
-        return $this->belongsTo(User::class)->withDefault();
+        return $this->belongsTo(User::class,'nis','nis')->withDefault();
     }
 
     /**
-     * Get the user that owns the Pengeluaran
+     * Get the user that owns the UangSaku
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'nis', 'nis')->withDefault();
+        return $this->belongsTo(User::class)->withDefault();
     }
 }

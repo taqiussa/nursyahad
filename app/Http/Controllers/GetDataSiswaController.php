@@ -17,6 +17,8 @@ class GetDataSiswaController extends Controller
                     'user' => fn ($q) => $q->select('nis', 'name')
                 ])
                 ->get()
+                ->sortBy(['kelas.tingkat', 'kelas.nama', 'user.name'])
+                ->values()
         ]);
     }
 }
