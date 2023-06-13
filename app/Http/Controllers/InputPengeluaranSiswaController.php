@@ -11,7 +11,7 @@ class InputPengeluaranSiswaController extends Controller
     public function index()
     {
         return inertia(
-            'Guru/InputPengeluaranSiswa',
+            'Bendahara/InputPengeluaranSiswa',
             [
                 'initTahun' => $this->data_tahun(),
                 'initSemester' => $this->data_semester(),

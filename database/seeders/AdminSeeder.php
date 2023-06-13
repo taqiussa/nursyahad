@@ -50,5 +50,13 @@ class AdminSeeder extends Seeder
         ]);
 
         $user->assignRole('Admin');
+
+        $roziqin = User::create([
+            'name' => 'Khoirur Roziqin,S.Sy',
+            'username' => 'roziqin',
+            'password' => bcrypt('sdkarakter'),
+        ]);
+
+        $roziqin->syncRoles(['Kepala Sekolah', 'Tata Usaha', 'Bendahara', 'Guru']);
     }
 }
