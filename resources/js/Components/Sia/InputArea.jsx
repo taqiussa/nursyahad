@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useRef } from 'react';
 
 export default forwardRef(function InputArea(
-    { type = 'text', name, id, value, message, className, required, isFocused, handleChange, label, rows },
+    { message, isFocused = false, className, label, rows, ...props },
     ref
 ) {
 
@@ -24,17 +24,13 @@ export default forwardRef(function InputArea(
             </div>
             <div>
                 <textarea
-                    name={name}
-                    id={id}
+                    {...props}
                     rows={rows}
-                    value={value}
                     className={
                         `border-gray-300 focus:border-emerald-500 focus:ring-emerald-500 rounded-md shadow-sm w-full ` +
                         className
                     }
                     ref={input}
-                    required={required}
-                    onChange={(e) => handleChange(e)}
                 >
                 </textarea>
             </div>

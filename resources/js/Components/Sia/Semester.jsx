@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useRef } from 'react';
 
 export default forwardRef(function Semester(
-    { name, id, value, message, className, required, isFocused, handleChange },
+    { message, isFocused = false, className, ...props },
     ref
 ) {
 
@@ -25,16 +25,13 @@ export default forwardRef(function Semester(
             </div>
             <div>
                 <select
-                    name={name}
-                    id={id}
-                    value={value}
+                    {...props}
                     className={
                         `border-gray-300 focus:border-emerald-500 focus:ring-emerald-500 rounded-md shadow-sm w-full ` +
                         className
                     }
                     ref={input}
-                    required={required}
-                    onChange={(e) => handleChange(e)}>
+                >
 
                     <option value="">Pilih Semester</option>
 
