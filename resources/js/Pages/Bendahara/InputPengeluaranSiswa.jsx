@@ -11,6 +11,7 @@ import AppLayout from '@/Layouts/AppLayout'
 import { Head, useForm } from '@inertiajs/react'
 import moment from 'moment/moment'
 import React, { useState } from 'react'
+import { toast } from 'react-toastify'
 
 const InputPengeluaranSiswa = ({ initTahun, initSemester }) => {
 
@@ -37,7 +38,8 @@ const InputPengeluaranSiswa = ({ initTahun, initSemester }) => {
 
         post(route('input-pengeluaran-siswa'),{
             onSuccess: () => {
-                
+                toast.success('Berhasil Simpan Pengeluaran Siswa')
+                setData({...data})
             }
         })
     }
