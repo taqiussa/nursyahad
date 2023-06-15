@@ -6,6 +6,7 @@ import Tahun from '@/Components/Sia/Tahun'
 import Tanggal from '@/Components/Sia/Tanggal'
 import { maskRupiah } from '@/Functions/functions'
 import getAllSiswa from '@/Functions/getAllSiswa'
+import getPengeluaranSiswa from '@/Functions/getPengeluaranSiswa'
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, useForm } from '@inertiajs/react'
 import moment from 'moment/moment'
@@ -33,6 +34,12 @@ const InputPengeluaranSiswa = ({ initTahun, initSemester }) => {
 
     const submit = (e) => {
         e.preventDefault()
+
+        post(route('input-pengeluaran-siswa'),{
+            onSuccess: () => {
+                
+            }
+        })
     }
 
     const handleChange = (e) => {
@@ -49,7 +56,8 @@ const InputPengeluaranSiswa = ({ initTahun, initSemester }) => {
     }
 
     async function getDataPengeluaran() {
-        
+        const res = await getPengeluaranSiswa(data.nis, data.tanggal)
+        setListPengeluaran(res.listPengeluaran)
     }
 
     return (

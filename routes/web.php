@@ -3,6 +3,7 @@
 use App\Http\Controllers\BuatRoleController;
 use App\Http\Controllers\DataKelasController;
 use App\Http\Controllers\DataSiswaController;
+use App\Http\Controllers\GetDataPengeluaranSiswaController;
 use App\Http\Controllers\GetDataSiswaController;
 use App\Http\Controllers\GetDataWilayahController;
 use App\Http\Controllers\InputPengeluaranSiswaController;
@@ -34,6 +35,11 @@ Route::middleware(['auth'])->group(function () {
     // Route Get Data Siswa 
     Route::controller(GetDataSiswaController::class)->group(function () {
         Route::post('get-all-siswa', 'get_all_siswa')->name('get-all-siswa');
+    });
+
+    // Route Get Data Pengeluaran Siswa
+    Route::controller(GetDataPengeluaranSiswaController::class)->group(function() {
+        Route::post('get-pengeluaran-siswa', 'get_pengeluaran_siswa')->name('get-pengeluaran-siswa');
     });
 
     // Route Get Data Wilayah
