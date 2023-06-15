@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\PemasukanSiswa;
 use App\Models\PengeluaranSiswa;
 
 class GetDataPengeluaranSiswaController extends Controller
@@ -10,8 +12,11 @@ class GetDataPengeluaranSiswaController extends Controller
     {
         return response()->json([
             'listPengeluaran' => PengeluaranSiswa::whereNis(request('nis'))
-                ->whereMonth('tanggal', request('tanggal'))
+                ->whereMonth('tanggal', Carbon::parse(request('tanggal'))->format('m'))
                 ->orderByDesc('tanggal')
+                ->get(),
+            'listUangSaku' => PemasukanSiswa::whereNis(request('nis'))
+                ->whereMonth('tanggal', Carbon::parse(request('tanggal'))->format('m'))
                 ->get()
         ]);
     }
