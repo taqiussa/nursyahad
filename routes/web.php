@@ -5,6 +5,7 @@ use App\Http\Controllers\DataKelasController;
 use App\Http\Controllers\DataSiswaController;
 use App\Http\Controllers\GetDataPengeluaranSiswaController;
 use App\Http\Controllers\GetDataSiswaController;
+use App\Http\Controllers\GetDataUangSakuController;
 use App\Http\Controllers\GetDataWilayahController;
 use App\Http\Controllers\InputPengeluaranSiswaController;
 use App\Http\Controllers\InputUangSakuController;
@@ -38,8 +39,13 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Route Get Data Pengeluaran Siswa
-    Route::controller(GetDataPengeluaranSiswaController::class)->group(function() {
+    Route::controller(GetDataPengeluaranSiswaController::class)->group(function () {
         Route::post('get-pengeluaran-siswa', 'get_pengeluaran_siswa')->name('get-pengeluaran-siswa');
+    });
+
+    // Route Get Data Uang Saku
+    Route::controller(GetDataUangSakuController::class)->group(function () {
+        Route::post('get-uang-saku', 'get_uang_saku')->name('get-uang-saku');
     });
 
     // Route Get Data Wilayah
