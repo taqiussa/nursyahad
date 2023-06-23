@@ -87,7 +87,7 @@ class TambahSiswaController extends Controller
                 $image->move(storage_path('app/public/foto'), $imageName);
             }
 
-            User::create([
+            $user =  User::create([
                 'name' => request('nama'),
                 'nis' => request('nis'),
                 'username' => request('nis'),
@@ -95,6 +95,8 @@ class TambahSiswaController extends Controller
                 'foto' => $imageName ?? '',
                 'password' => bcrypt('12345678')
             ]);
+
+            $user->assignRole('Siswa');
 
             Biodata::create([
                 'nis' => request('nis'),
