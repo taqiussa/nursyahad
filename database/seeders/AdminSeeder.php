@@ -58,5 +58,13 @@ class AdminSeeder extends Seeder
         ]);
 
         $roziqin->syncRoles(['Kepala Sekolah', 'Tata Usaha', 'Bendahara', 'Guru']);
+
+        $demo = User::create([
+            'name' => 'Demo',
+            'username' => 'demo',
+            'password' => bcrypt('12345678'),
+        ]);
+
+        $demo->assignRole('Tata Usaha');
     }
 }
