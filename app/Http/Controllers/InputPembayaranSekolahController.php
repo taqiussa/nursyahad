@@ -11,10 +11,9 @@ class InputPembayaranSekolahController extends Controller
     public function index()
     {
         return inertia(
-            'Guru/InputPembayaranSekolah',
+            'Bendahara/InputPembayaranSekolah',
             [
                 'initTahun' => $this->data_tahun(),
-
             ]
         );
     }
