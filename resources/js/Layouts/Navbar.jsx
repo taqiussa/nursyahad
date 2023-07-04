@@ -27,7 +27,7 @@ export default function Navbar({ openSide }) {
                             from-emerald-500 via-lime-500 to-teal-500
                             animate-text pr-3">
 
-                    Sistem Informasi Akademik
+                    E-Sistem
 
                 </div>
 
