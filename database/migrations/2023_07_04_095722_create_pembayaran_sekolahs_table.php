@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('pembayaran_sekolahs', function (Blueprint $table) {
             $table->id();
+            $table->string('tahun', 30);
+            $table->date('tanggal');
+            $table->string('nis',50);
+            $table->foreignId('kelas_id');
+            $table->string('tingkat',3)->nullable();
+            $table->foreignId('gunabayar_sekolah_id');
+            $table->integer('jumlah');
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }

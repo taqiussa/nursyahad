@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AturGunabayarSekolahController;
 use App\Http\Controllers\InputPembayaranSekolahController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InputUangSakuController;
@@ -11,11 +12,18 @@ Route::middleware([
     'role:Admin|Bendahara|Guru|Karyawan|Kepala Sekolah|Kesiswaan|Kurikulum|Tata Usaha'
 ])->group(function () {
 
+    // Route Atur Gunabayar Sekolah
+    Route::controller(AturGunabayarSekolahController::class)->group(function () {
+        Route::get('atur-gunabayar-sekolah', 'index')->name('atur-gunabayar-sekolah');
+        Route::post('atur-gunabayar-sekolah', 'simpan')->name('atur-gunabayar-sekolah.simpan');
+        Route::delete('atur-gunabayar-sekolah', 'hapus')->name('atur-gunabayar-sekolah.hapus');
+    });
+
     // Route Input Pembayaran Sekolah
     Route::controller(InputPembayaranSekolahController::class)->group(function () {
         Route::get('input-pembayaran-sekolah', 'index')->name('input-pembayaran-sekolah');
-        Route::post('input-pembayaran-sekolah', 'simpan')->name('input-pembayaran-sekolah');
-        Route::delete('input-pembayaran-sekolah', 'hapus')->name('input-pembayaran-sekolah');
+        Route::post('input-pembayaran-sekolah', 'simpan')->name('input-pembayaran-sekolah.simpan');
+        Route::delete('input-pembayaran-sekolah', 'hapus')->name('input-pembayaran-sekolah.hapus');
     });
 
     // Route Input Pengeluaran Siswa

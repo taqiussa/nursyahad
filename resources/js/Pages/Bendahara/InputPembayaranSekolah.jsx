@@ -9,6 +9,7 @@ const InputPembayaranSekolah = ({ initTahun }) => {
     const { data, setData, post, errors, processing, delete: destroy } = useForm({
         tahun: initTahun,
         nis: '',
+        
     })
 
     const handleChange = (e) => {

@@ -12,6 +12,16 @@ class PembayaranSekolah extends Model
     protected $guarded = [];
 
     /**
+     * Get the gunabayar that owns the PembayaranSekolah
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function gunabayar(): BelongsTo
+    {
+        return $this->belongsTo(GunabayarSekolah::class)->withDefault();
+    }
+
+    /**
      * Get the user that owns the PembayaranSekolah
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
