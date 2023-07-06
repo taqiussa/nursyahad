@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GetDataBendaharaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GetDataSiswaController;
 use App\Http\Controllers\GetDataWilayahController;
@@ -7,6 +8,11 @@ use App\Http\Controllers\GetDataUangSakuController;
 use App\Http\Controllers\GetDataPengeluaranSiswaController;
 
 Route::middleware(['auth'])->group(function () {
+
+    // Route Get Data Bendahara
+    Route::controller(GetDataBendaharaController::class)->group(function () {
+        Route::post('get-wajib-bayar-sekolah', 'get_wajib_bayar_sekolah')->name('get-wajib-bayar-sekolah');
+    });
 
     // Route Get Data Siswa 
     Route::controller(GetDataSiswaController::class)->group(function () {

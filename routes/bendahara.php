@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AturGunabayarSekolahController;
+use App\Http\Controllers\AturWajibBayarSekolahController;
 use App\Http\Controllers\InputPembayaranSekolahController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InputUangSakuController;
@@ -18,6 +19,14 @@ Route::middleware([
         Route::post('atur-gunabayar-sekolah', 'simpan')->name('atur-gunabayar-sekolah.simpan');
         Route::delete('atur-gunabayar-sekolah', 'hapus')->name('atur-gunabayar-sekolah.hapus');
     });
+
+    // Route Atur Wajib Bayar Sekolah
+    Route::controller(AturWajibBayarSekolahController::class)->group(function () {
+        Route::get('atur-wajib-bayar-sekolah', 'index')->name('atur-wajib-bayar-sekolah');
+        Route::post('atur-wajib-bayar-sekolah', 'simpan')->name('atur-wajib-bayar-sekolah.simpan');
+        Route::delete('atur-wajib-bayar-sekolah', 'hapus')->name('atur-wajib-bayar-sekolah.hapus');
+    });
+
 
     // Route Input Pembayaran Sekolah
     Route::controller(InputPembayaranSekolahController::class)->group(function () {
