@@ -3,7 +3,6 @@ import Hapus from '@/Components/Sia/Hapus'
 import InputText from '@/Components/Sia/InputText'
 import SearchableSelect from '@/Components/Sia/SearchableSelect'
 import Semester from '@/Components/Sia/Semester'
-import Sweet from '@/Components/Sia/Sweet'
 import Tahun from '@/Components/Sia/Tahun'
 import Tanggal from '@/Components/Sia/Tanggal'
 import { hariTanggal, maskRupiah, namaBulan, penjumlahan, rupiah } from '@/Functions/functions'
@@ -46,32 +45,6 @@ const InputPengeluaranSiswa = ({ initTahun, initSemester }) => {
                 trackPromise(getDataPengeluaran())
             }
         })
-    }
-
-    const handleDelete = (id) => {
-        Sweet.fire({
-            title: 'Anda yakin menghapus?',
-            text: "Hapus Pengeluaran Siswa!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Ya, Hapus!',
-            cancelButtonText: 'Batal'
-        })
-            .then((result) => {
-                if (result.isConfirmed) {
-                    destroy(route('input-pengeluaran-siswa.hapus',
-                        {
-                            id: id
-                        }),
-                        {
-                            onSuccess: (page) => {
-                                toast.success('Berhasil Hapus Pengeluaran Siswa')
-                                setData({ ...data })
-                                trackPromise(getDataPengeluaran())
-                            }
-                        })
-                }
-            })
     }
 
     const handleChange = (e) => {
@@ -202,7 +175,10 @@ const InputPengeluaranSiswa = ({ initTahun, initSemester }) => {
                                 </td>
                                 <td className="py-2 px-2 font-medium text-slate-600 inline-flex space-x-3">
                                     <Hapus
-                                        onClick={() => handleDelete(saku.id)}
+                                        id={saku.id}
+                                        destroy={destroy}
+                                        routes='input-pengeluaran-siswa.hapus'
+                                        method={getDataPengeluaran}
                                     />
                                 </td>
                             </tr>

@@ -3,7 +3,6 @@ import Hapus from '@/Components/Sia/Hapus'
 import InputText from '@/Components/Sia/InputText'
 import SearchableSelect from '@/Components/Sia/SearchableSelect'
 import Semester from '@/Components/Sia/Semester'
-import Sweet from '@/Components/Sia/Sweet'
 import Tahun from '@/Components/Sia/Tahun'
 import Tanggal from '@/Components/Sia/Tanggal'
 import { hariTanggal, maskRupiah, rupiah } from '@/Functions/functions'
@@ -47,29 +46,6 @@ const InputUangSaku = ({ initTahun, initSemester }) => {
                 trackPromise(getData())
             }
         })
-    }
-
-    const handleDelete = (id) => {
-        Sweet
-            .fire({
-                title: 'Anda Yakin menghapus?',
-                text: 'Hapus Pemasukan',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Ya, hapus!',
-                cancelButtonText: 'Batal'
-            })
-            .then((result) => {
-                if (result.isConfirmed) {
-                    destroy(route('input-uang-saku.hapus', { id: id }), {
-                        onSuccess: () => {
-                            toast.success('Berhasil Hapus Uang Saku')
-                            setData({ ...data })
-                            trackPromise(getData())
-                        }
-                    })
-                }
-            })
     }
 
     const handleChange = (e) => {
@@ -197,7 +173,10 @@ const InputUangSaku = ({ initTahun, initSemester }) => {
                                 </td>
                                 <td className="py-2 px-2 font-medium text-slate-600 inline-flex space-x-3">
                                     <Hapus
-                                        onClick={() => handleDelete(saku.id)}
+                                        id={saku.id}
+                                        routes='input-uang-saku.hapus'
+                                        destroy={destroy}
+                                        method={getData}
                                     />
                                 </td>
                             </tr>

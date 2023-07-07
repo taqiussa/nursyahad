@@ -29,7 +29,9 @@ class AturWajibBayarSekolahController extends Controller
             'tahun' => 'required'
         ]);
 
-        WajibBayarSekolah::created($validate);
+        $validate['jumlah'] = ambilAngka(request('jumlah'));
+        
+        WajibBayarSekolah::create($validate);
 
         return to_route('atur-wajib-bayar-sekolah');
     }
