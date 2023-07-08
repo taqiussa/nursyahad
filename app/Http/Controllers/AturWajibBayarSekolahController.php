@@ -13,7 +13,7 @@ class AturWajibBayarSekolahController extends Controller
     public function index()
     {
         return inertia(
-            'Bendahara/AturWajibBayar',
+            'Bendahara/AturWajibBayarSekolah',
             [
                 'initTahun' => $this->data_tahun(),
                 'listGunabayar' => GunabayarSekolah::get()

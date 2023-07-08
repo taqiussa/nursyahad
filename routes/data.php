@@ -11,6 +11,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Route Get Data Bendahara
     Route::controller(GetDataBendaharaController::class)->group(function () {
+        Route::post('get-gunabayar', 'get_gunabayar')->name('get-gunabayar');
         Route::post('get-wajib-bayar-sekolah', 'get_wajib_bayar_sekolah')->name('get-wajib-bayar-sekolah');
     });
 

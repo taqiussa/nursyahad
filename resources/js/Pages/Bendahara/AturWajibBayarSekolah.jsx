@@ -12,7 +12,7 @@ import { Head, useForm } from '@inertiajs/react'
 import React, { useEffect } from 'react'
 import { trackPromise } from 'react-promise-tracker'
 
-const AturWajibBayar = ({ initTahun, listGunabayar }) => {
+const AturWajibBayarSekolah = ({ initTahun, listGunabayar }) => {
 
     const { data, setData, post, errors, processing, delete: destroy } = useForm({
         tahun: initTahun,
@@ -125,5 +125,5 @@ const AturWajibBayar = ({ initTahun, listGunabayar }) => {
     )
 }
 
-AturWajibBayar.layout = page => <AppLayout children={page} />
-export default AturWajibBayar
+AturWajibBayarSekolah.layout = page => <AppLayout children={page} />
+export default AturWajibBayarSekolah

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nis',50);
             $table->foreignId('kelas_id');
             $table->string('tingkat',3)->nullable();
-            $table->foreignId('gunabayar_sekolah_id');
+            $table->foreignId('gunabayar_id');
             $table->integer('jumlah');
             $table->foreignId('user_id');
             $table->timestamps();
