@@ -7,6 +7,7 @@ import Tanggal from '@/Components/Sia/Tanggal'
 import { maskRupiah, rupiah } from '@/Functions/functions'
 import getAllSiswa from '@/Functions/getAllSiswa'
 import getGunabayar from '@/Functions/getGunabayar'
+import getPembayaranSiswa from '@/Functions/getPembayaranSiswa'
 import AppLayout from '@/Layouts/AppLayout'
 import Header from '@/Layouts/Partials/Header'
 import { Head, useForm } from '@inertiajs/react'
@@ -27,6 +28,7 @@ const InputPembayaranSekolah = ({ initTahun, listGunabayar }) => {
     })
 
     const [listSiswa, setListSiswa] = useState([])
+    const [listPembayaran, setListPembayaran] = useState([])
 
     const optionsSiswa = listSiswa.map((siswa) => ({
         value: siswa.nis,
@@ -43,13 +45,14 @@ const InputPembayaranSekolah = ({ initTahun, listGunabayar }) => {
         setData({ ...data, jumlah: rupiah(res.jumlah) })
     }
 
+    async function getDataPembayaranSiswa() {
+        const res = await getPembayaranSiswa(data.tahun, data.nis)
+        setListPembayaran(res.listPembayaran)
+    }
+
     const handleChange = (e) => {
         setData(e.target.name, e.target.value)
     }
-
-    // const handleRupiah = (e) => {
-    //     setData('jumlah', maskRupiah(e))
-    // }
 
     useEffect(() => {
         if (data.tahun) {
@@ -122,12 +125,85 @@ const InputPembayaranSekolah = ({ initTahun, listGunabayar }) => {
                         label='jumlah'
                         value={data.jumlah}
                         message={errors.jumlah}
-                        // onChange={handleRupiah}
                         disabled={true}
                     />
 
                 </div>
             </FormSimpan>
+
+            <div className="overflow-x-auto">
+                <table className="w-full text-sm text-slate-600">
+                    <thead className="text-sm text-slate-600 bg-gray-50">
+                        <tr>
+                            <th scope='col' className="py-3 px-2">
+                                No
+                            </th>
+                            <th scope='col' className="py-3 px-2 text-left">
+                                Tanggal
+                            </th>
+                            <th scope='col' className="py-3 px-2 text-left">
+                                Gunabayar
+                            </th>
+                            <th scope='col' className="py-3 px-2 text-left">
+                                Jumlah
+                            </th>
+                            <th scope='col' className="py-3 px-2 text-left">
+                                Aksi
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {listPembayaran && listPembayaran.map((saku, index) => (
+                            <tr key={index} className="bg-white border-b hover:bg-slate-300 odd:bg-slate-200">
+                                <td className="py-2 px-2 font-medium text-slate-600 text-center">
+                                    {index + 1}
+                                </td>
+                                <td className="py-2 px-2 font-medium text-slate-600">
+                                    {hariTanggal(saku.tanggal)}
+                                </td>
+                                <td className="py-2 px-2 font-medium text-slate-600">
+                                    {rupiah(saku.jumlah)}
+                                </td>
+                                <td className="py-2 px-2 font-medium text-slate-600">
+                                    {saku.keterangan}
+                                </td>
+                                <td className="py-2 px-2 font-medium text-slate-600 inline-flex space-x-3">
+                                    <Hapus
+                                        id={saku.id}
+                                        destroy={destroy}
+                                        routes='input-pengeluaran-siswa.hapus'
+                                        method={getDataPengeluaran}
+                                    />
+                                </td>
+                            </tr>
+                        ))}
+                        {/* <tr className="bg-slate-300 border-b">
+                            <td className="py-2 px-2 font-bold text-lg text-slate-600" colSpan={4}>
+                                Total Uang Saku Masuk
+                            </td>
+                            <td className="py-2 px-2 font-bold text-lg text-slate-600" colSpan={4}>
+                                {rupiah(penjumlahan(listUangSaku, 'jumlah'))}
+                            </td>
+                        </tr>
+                        <tr className="bg-slate-300 border-b">
+                            <td className="py-2 px-2 font-bold text-lg text-slate-600" colSpan={4}>
+                                Total Pengeluaran
+                            </td>
+                            <td className="py-2 px-2 font-bold text-lg text-slate-600" colSpan={4}>
+                                {rupiah(penjumlahan(listPengeluaran, 'jumlah'))}
+                            </td>
+                        </tr>
+                        <tr className="bg-slate-300 border-b">
+                            <td className="py-2 px-2 font-bold text-lg text-slate-600" colSpan={4}>
+                                Total Akhir Bulan {namaBulan(moment(new Date(data.tanggal)).format('MM'))}
+                            </td>
+                            <td className="py-2 px-2 font-bold text-lg text-slate-600" colSpan={4}>
+                                {rupiah(penjumlahan(listUangSaku, 'jumlah') - penjumlahan(listPengeluaran, 'jumlah'))}
+                            </td>
+                        </tr> */}
+                    </tbody>
+                </table>
+            </div>
         </>
     )
 }
