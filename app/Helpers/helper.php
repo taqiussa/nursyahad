@@ -113,6 +113,29 @@ function arrayBulan()
     ]), false);
 }
 
+
+function arrayKehadiran()
+{
+    return json_decode(json_encode([
+        [
+            'id' => 1,
+            'nama' => 'Hadir'
+        ],
+        [
+            'id' => 2,
+            'nama' => 'Sakit'
+        ],
+        [
+            'id' => 3,
+            'nama' => 'Izin'
+        ],
+        [
+            'id' => 4,
+            'nama' => 'Alpha'
+        ],
+    ]));
+}
+
 // enum EnumKategoriKelas: int
 // {
 //     case UMUM = 1;
@@ -126,15 +149,15 @@ function arrayBulan()
 //     case FORMATIF = 4;
 // }
 
-// enum EnumKehadiran: int
-// {
-//     case HADIR = 1;
-//     case SAKIT = 2;
-//     case IZIN = 3;
-//     case ALPHA = 4;
-//     case BOLOS = 5;
-//     case IZIN_PULANG = 6;
-// }
+enum EnumKehadiran: int
+{
+    case HADIR = 1;
+    case SAKIT = 2;
+    case IZIN = 3;
+    case ALPHA = 4;
+    // case BOLOS = 5;
+    // case IZIN_PULANG = 6;
+}
 
 // enum EnumKategoriSikap: int
 // {
