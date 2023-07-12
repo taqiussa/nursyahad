@@ -11,6 +11,7 @@ function ambilAngka($string)
 {
     return  str_replace(['Rp. ', '.'], '', $string);
 }
+
 function tanggal($tanggal)
 {
     return Carbon::parse($tanggal)->translatedFormat('d F Y');

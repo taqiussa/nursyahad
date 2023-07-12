@@ -28,7 +28,7 @@ class InputPembayaranSekolahController extends Controller
             'tahun' => 'required',
             'tanggal' => 'required',
             'nis' => 'required',
-            'gunabayarId' => 'required',
+            'gunabayar_id' => 'required',
             'jumlah' => 'required',
         ]);
 
@@ -40,7 +40,6 @@ class InputPembayaranSekolahController extends Controller
         $validate['tingkat'] = $siswa->tingkat;
         $validate['jumlah'] = ambilAngka(request('jumlah'));
         $validate['user_id'] = auth()->user()->id;
-        $validate['gunabayar_id'] = request('gunabayarId');
 
         PembayaranSekolah::create($validate);
 

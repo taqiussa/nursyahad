@@ -10,7 +10,7 @@ export default function FormSimpan({ data, post, routes, method, disabled, child
         post(route(routes, data), {
             onSuccess: () => {
                 toast.success('Berhasil Simpan')
-                trackPromise(method())
+                method && trackPromise(method())
             },
             onError: () => {
                 Sweet

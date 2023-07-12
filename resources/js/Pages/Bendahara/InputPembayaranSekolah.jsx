@@ -1,10 +1,11 @@
 import FormSimpan from '@/Components/FormSimpan'
 import Gunabayar from '@/Components/Sia/Gunabayar'
+import Hapus from '@/Components/Sia/Hapus'
 import InputText from '@/Components/Sia/InputText'
 import SearchableSelect from '@/Components/Sia/SearchableSelect'
 import Tahun from '@/Components/Sia/Tahun'
 import Tanggal from '@/Components/Sia/Tanggal'
-import { maskRupiah, rupiah } from '@/Functions/functions'
+import { hariTanggal, maskRupiah, rupiah } from '@/Functions/functions'
 import getAllSiswa from '@/Functions/getAllSiswa'
 import getGunabayar from '@/Functions/getGunabayar'
 import getPembayaranSiswa from '@/Functions/getPembayaranSiswa'
@@ -23,8 +24,8 @@ const InputPembayaranSekolah = ({ initTahun, listGunabayar }) => {
         tahun: initTahun,
         tanggal: moment(new Date()).format('YYYY-MM-DD'),
         nis: '',
-        gunabayarId: '',
-        jumlah: 0,
+        gunabayar_id: '',
+        jumlah: 'Rp. 0',
     })
 
     const [listSiswa, setListSiswa] = useState([])
@@ -41,8 +42,8 @@ const InputPembayaranSekolah = ({ initTahun, listGunabayar }) => {
     }
 
     async function getDataGunabayar() {
-        const res = await getGunabayar(data.tahun, data.gunabayarId, 'Sekolah')
-        setData({ ...data, jumlah: rupiah(res.jumlah) })
+        const res = await getGunabayar(data.tahun, data.gunabayar_id, 'Sekolah')
+        setData({ ...data, jumlah: 'Rp. ' + res.jumlah })
     }
 
     async function getDataPembayaranSiswa() {
@@ -63,13 +64,21 @@ const InputPembayaranSekolah = ({ initTahun, listGunabayar }) => {
     }, [data.tahun])
 
     useEffect(() => {
-        if (data.tahun && data.gunabayarId) {
+        if (data.nis) {
+            trackPromise(getDataPembayaranSiswa())
+        } else {
+            setListPembayaran([])
+        }
+    }, [data.nis])
+
+    useEffect(() => {
+        if (data.tahun && data.gunabayar_id) {
             trackPromise(getDataGunabayar())
 
         } else {
             setData('jumlah', maskRupiah('0'))
         }
-    }, [data.tahun, data.gunabayarId])
+    }, [data.tahun, data.gunabayar_id])
 
     return (
         <>
@@ -113,9 +122,9 @@ const InputPembayaranSekolah = ({ initTahun, listGunabayar }) => {
                 </div>
                 <div className="lg:grid lg:grid-cols-4 lg:gap-2 lg:space-y-0 space-y-3 mb-3">
                     <Gunabayar
-                        name='gunabayarId'
-                        value={data.gunabayarId}
-                        message={errors.gunabayarId}
+                        name='gunabayar_id'
+                        value={data.gunabayar_id}
+                        message={errors.gunabayar_id}
                         onChange={handleChange}
                         listGunabayar={listGunabayar}
                     />
@@ -123,7 +132,7 @@ const InputPembayaranSekolah = ({ initTahun, listGunabayar }) => {
                     <InputText
                         name='jumlah'
                         label='jumlah'
-                        value={data.jumlah}
+                        value={maskRupiah(data.jumlah)}
                         message={errors.jumlah}
                         disabled={true}
                     />
@@ -153,26 +162,26 @@ const InputPembayaranSekolah = ({ initTahun, listGunabayar }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {listPembayaran && listPembayaran.map((saku, index) => (
+                        {listPembayaran && listPembayaran.map((bayar, index) => (
                             <tr key={index} className="bg-white border-b hover:bg-slate-300 odd:bg-slate-200">
                                 <td className="py-2 px-2 font-medium text-slate-600 text-center">
                                     {index + 1}
                                 </td>
                                 <td className="py-2 px-2 font-medium text-slate-600">
-                                    {hariTanggal(saku.tanggal)}
+                                    {hariTanggal(bayar.tanggal)}
                                 </td>
                                 <td className="py-2 px-2 font-medium text-slate-600">
-                                    {rupiah(saku.jumlah)}
+                                    {bayar.gunabayar.nama}
                                 </td>
                                 <td className="py-2 px-2 font-medium text-slate-600">
-                                    {saku.keterangan}
+                                    {rupiah(bayar.jumlah)}
                                 </td>
                                 <td className="py-2 px-2 font-medium text-slate-600 inline-flex space-x-3">
                                     <Hapus
-                                        id={saku.id}
+                                        id={bayar.id}
                                         destroy={destroy}
-                                        routes='input-pengeluaran-siswa.hapus'
-                                        method={getDataPengeluaran}
+                                        routes='input-pembayaran-sekolah.hapus'
+                                        method={getDataPembayaranSiswa}
                                     />
                                 </td>
                             </tr>
