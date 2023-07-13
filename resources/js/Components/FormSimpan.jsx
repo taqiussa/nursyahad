@@ -2,29 +2,34 @@ import { trackPromise } from "react-promise-tracker"
 import { toast } from "react-toastify"
 import Sweet from "./Sia/Sweet"
 
-export default function FormSimpan({ data, post, routes, method, disabled, children }) {
+export default function FormSimpan({ data, post, reset, routes, method, disabled, children }) {
 
-    const submit = (e) => {
+    const submit = async (e) => {
         e.preventDefault()
 
-        post(route(routes, data), {
-            onSuccess: () => {
-                toast.success('Berhasil Simpan')
-                method && trackPromise(method())
-            },
-            onError: () => {
-                Sweet
-                    .fire({
-                        title: 'Gagal',
-                        text: 'Silahkan Cek Data Anda',
-                        icon: 'error'
-                    })
-            }
-        })
+        try {
+            await post(route(routes, data), {
+                onSuccess: () => {
+                    toast.success('Berhasil Simpan')
+                    method && trackPromise(method())
+                },
+                onError: () => {
+                    Sweet
+                        .fire({
+                            title: 'Gagal',
+                            text: 'Silahkan Cek Data Anda',
+                            icon: 'error'
+                        })
+                }
+            })
+        } catch (error) {
+            reset && reset()
+            console.log(error)
+        }
     }
 
     return (
-        <form onSubmit={submit}>
+        <form onSubmit={submit} className="space-y-3">
             <div>
                 {children}
             </div>

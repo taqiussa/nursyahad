@@ -14,7 +14,7 @@ import { trackPromise } from 'react-promise-tracker'
 
 const AturWajibBayarSekolah = ({ initTahun, listGunabayar }) => {
 
-    const { data, setData, post, errors, processing, delete: destroy } = useForm({
+    const { data, setData, post,reset, errors, processing, delete: destroy } = useForm({
         tahun: initTahun,
         gunabayar_id: '',
         jumlah: 0,
@@ -49,6 +49,7 @@ const AturWajibBayarSekolah = ({ initTahun, listGunabayar }) => {
                 routes='atur-wajib-bayar-sekolah.simpan'
                 method={getDataWajibBayar}
                 disabled={processing}
+                reset={reset}
             >
                 <div className="lg:grid lg:grid-cols-4 lg:gap-2 grid grid-cols-2 gap-2 lg:space-y-0 space-y-2 mb-2">
                     <Tahun

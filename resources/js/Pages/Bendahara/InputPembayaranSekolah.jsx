@@ -20,7 +20,7 @@ import { trackPromise } from 'react-promise-tracker'
 
 const InputPembayaranSekolah = ({ initTahun, listGunabayar }) => {
 
-    const { data, setData, post, errors, processing, delete: destroy } = useForm({
+    const { data, setData, post, reset, errors, processing, delete: destroy } = useForm({
         tahun: initTahun,
         tanggal: dayjs(new Date()).format('YYYY-MM-DD'),
         nis: '',
@@ -89,6 +89,7 @@ const InputPembayaranSekolah = ({ initTahun, listGunabayar }) => {
                 post={post}
                 routes='input-pembayaran-sekolah.simpan'
                 disabled={processing}
+                reset={reset}
             >
 
                 <div className="lg:grid lg:grid-cols-4 lg:gap-2 lg:space-y-0 space-y-3 mb-3">

@@ -68,4 +68,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Pengeluaran::class, 'nis', 'nis');
     }
+
+    /**
+     * Get the siswa associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function siswa(): HasOne
+    {
+        return $this->hasOne(Siswa::class, 'nis', 'nis')->withDefault();
+    }
 }

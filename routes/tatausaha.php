@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AturKelasSiswaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataKelasController;
 use App\Http\Controllers\DataSiswaController;
@@ -11,6 +12,12 @@ Route::middleware([
     'auth',
     'role:Admin|Bendahara|Guru|Karyawan|Kepala Sekolah|Kesiswaan|Kurikulum|Tata Usaha'
 ])->group(function () {
+
+    // Route Atur Kelas Siswa
+    Route::controller(AturKelasSiswaController::class)->group(function () {
+        Route::get('atur-kelas-siswa', 'index')->name('atur-kelas-siswa');
+        Route::post('atur-kelas-siswa', 'simpan')->name('atur-kelas-siswa.simpan');
+    });
 
     // Route Data Kelas
     Route::controller(DataKelasController::class)->group(function () {
