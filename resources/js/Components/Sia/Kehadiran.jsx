@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useRef } from 'react';
 
 export default forwardRef(function Kehadiran(
-    { name, id, value, message, className, required, isFocused, handleChange, listKehadiran, label },
+    { message, className, isFocused, listKehadiran, label, ...props },
     ref
 ) {
 
@@ -25,16 +25,12 @@ export default forwardRef(function Kehadiran(
                 </div>}
             <div>
                 <select
-                    name={name}
-                    id={id}
-                    value={value}
+                {...props}
                     className={
                         `border-gray-300 focus:border-emerald-500 focus:ring-emerald-500 rounded-md shadow-sm w-auto ` +
                         className
                     }
                     ref={input}
-                    required={required}
-                    onChange={(e) => handleChange(e)}
                 >
 
                     <option value="">Pilih Kehadiran</option>

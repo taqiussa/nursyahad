@@ -56,6 +56,7 @@ export function hariTanggal(tanggal) {
     return new Date(tanggal).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
 }
 
+
 export function maskRupiah(angka) {
     // Remove all non-numeric characters
     const numericValue = angka.replace(/\D/g, '')
@@ -86,6 +87,21 @@ export function namaHari(hari) {
             return 'Sabtu';
         default:
             return '';
+    }
+}
+
+export function namaKehadiran(kehadiran) {
+    switch (kehadiran) {
+        case 1:
+            return 'Hadir'
+        case 2:
+            return 'Sakit'
+        case 3:
+            return 'Izin'
+        case 4:
+            return 'Alpha'
+        default:
+            return ''
     }
 }
 

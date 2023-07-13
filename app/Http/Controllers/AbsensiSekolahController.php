@@ -90,10 +90,10 @@ class AbsensiSekolahController extends Controller
                 'kelas_id' => request('kelasId'),
                 'kehadiran_id' => request('kehadiranId'),
                 'tahun' => request('tahun'),
-                'semester' => request('semester'),
+                'semester' => $this->data_semester(),
                 'tanggal' => request('tanggal'),
                 'jam' => request('jam'),
-                'user_id0' => auth()->user()->id,
+                'user_id' => auth()->user()->id,
             ]
         );
 

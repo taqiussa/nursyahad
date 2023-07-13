@@ -33,7 +33,6 @@ class GetDataAbsensiController extends Controller
                 ->where('kehadiran_id', '!=', EnumKehadiran::HADIR)
                 ->with([
                     'siswa',
-                    'kehadiran'
                 ])
                 ->get()
                 ->sortBy(['user.name', 'jam'])

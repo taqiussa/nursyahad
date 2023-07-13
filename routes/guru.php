@@ -12,5 +12,6 @@ Route::middleware([
     Route::controller(AbsensiSekolahController::class)->group(function () {
         Route::get('absensi-sekolah', 'index')->name('absensi-sekolah');
         Route::post('absensi-sekolah', 'simpan')->name('absensi-sekolah.simpan');
+        Route::post('absensi-sekolah/nihil', 'nihil')->name('absensi-sekolah.nihil');
     });
 });

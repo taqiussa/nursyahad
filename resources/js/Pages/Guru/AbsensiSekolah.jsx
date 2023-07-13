@@ -4,6 +4,7 @@ import Kehadiran from '@/Components/Sia/Kehadiran'
 import Kelas from '@/Components/Sia/Kelas'
 import Tahun from '@/Components/Sia/Tahun'
 import Tanggal from '@/Components/Sia/Tanggal'
+import { namaKehadiran } from '@/Functions/functions'
 import getAbsensiSekolah from '@/Functions/getAbsensiSekolah'
 import getInfoAbsensiSekolah from '@/Functions/getInfoAbsensiSekolah'
 import AppLayout from '@/Layouts/AppLayout'
@@ -206,7 +207,7 @@ const AbsensiSekolah = ({ initTahun, listKehadiran, listKelas }) => {
             <div className='text-slate-600 py-2'>
                 Informasi :
                 {listInfo && listInfo.map((info, index) => (
-                    <li key={index}>{index + 1}. {info.siswa?.name} - {info.kehadiran?.nama} - {info.jam}</li>
+                    <li key={index}>{index + 1}. {info.siswa?.name} - {namaKehadiran(info.kehadiran_id)} - {info.jam}</li>
                 ))}
             </div>
 
