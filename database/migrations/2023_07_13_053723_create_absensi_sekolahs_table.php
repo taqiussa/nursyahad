@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('absensi_sekolahs', function (Blueprint $table) {
             $table->id();
             $table->string('tahun', 30);
-            $table->string('semester',2);
+            $table->string('semester', 2);
             $table->date('tanggal');
+            $table->string('jam', 3);
             $table->string('nis', 50);
             $table->foreignId('kelas_id');
             $table->foreignId('kehadiran_id');

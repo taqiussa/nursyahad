@@ -4,8 +4,8 @@ import Sidebar from './Sidebar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Spinner from '@/Components/Sia/Spinner';
-import moment from 'moment';
 import { usePage } from '@inertiajs/react';
+import dayjs from 'dayjs';
 
 export default function AppLayout({ children }) {
     const [open, setOpen] = useState(false);
@@ -40,7 +40,7 @@ export default function AppLayout({ children }) {
                     </main>
                 </div>
                 <footer className='py-1 px-2 text-slate-600 bottom-0 fixed bg-white/30 backdrop-blur w-full'>
-                    &copy; SD Kansya 2023 - {moment(new Date()).format('YYYY')} | Developed By Kendali Koding
+                    &copy; SD Kansya 2023 - {dayjs(new Date()).format('YYYY')} | Developed By Kendali Koding
                 </footer>
                 {/* End Main Content */}
             </div>

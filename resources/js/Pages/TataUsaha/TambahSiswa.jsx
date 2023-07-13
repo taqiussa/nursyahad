@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, useForm } from '@inertiajs/react'
 import InputText from '@/Components/Sia/InputText'
-import moment from 'moment'
 import getKabupaten from '@/Functions/getKabupaten'
 import getKecamatan from '@/Functions/getKecamatan'
 import getDesa from '@/Functions/getDesa'
@@ -18,6 +17,7 @@ import PrimaryButton from '@/Components/PrimaryButton'
 import { toast } from 'react-toastify'
 import Kelas from '@/Components/Sia/Kelas'
 import Tahun from '@/Components/Sia/Tahun'
+import dayjs from 'dayjs'
 
 const TambahSiswa = ({ initTahun, listProvinsi, listKelas }) => {
 
@@ -28,7 +28,7 @@ const TambahSiswa = ({ initTahun, listProvinsi, listKelas }) => {
         jenisKelamin: '',
         nik: '',
         tempatLahir: '',
-        tanggalLahir: moment(new Date()).format('YYYY-MM-DD'),
+        tanggalLahir: dayjs(new Date()).format('YYYY-MM-DD'),
         namaAyah: '',
         namaIbu: '',
         alamatLengkap: '',

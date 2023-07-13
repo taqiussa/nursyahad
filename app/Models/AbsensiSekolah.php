@@ -30,4 +30,14 @@ class AbsensiSekolah extends Model
     {
         return $this->belongsTo(User::class, 'nis', 'nis')->withDefault();
     }
+
+    /**
+     * Get the user that owns the AbsensiSekolah
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'nis', 'nis')->withDefault();
+    }
 }

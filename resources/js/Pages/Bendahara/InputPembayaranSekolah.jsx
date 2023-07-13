@@ -12,7 +12,7 @@ import getPembayaranSiswa from '@/Functions/getPembayaranSiswa'
 import AppLayout from '@/Layouts/AppLayout'
 import Header from '@/Layouts/Partials/Header'
 import { Head, useForm } from '@inertiajs/react'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -22,7 +22,7 @@ const InputPembayaranSekolah = ({ initTahun, listGunabayar }) => {
 
     const { data, setData, post, errors, processing, delete: destroy } = useForm({
         tahun: initTahun,
-        tanggal: moment(new Date()).format('YYYY-MM-DD'),
+        tanggal: dayjs(new Date()).format('YYYY-MM-DD'),
         nis: '',
         gunabayar_id: '',
         jumlah: 'Rp. 0',

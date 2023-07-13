@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useRef } from 'react';
 
 export default forwardRef(function Jam(
-    { name, id, value, message, className, required, isFocused, handleChange },
+    { name, id, value, message, className, isFocused, ...props },
     ref
 ) {
 
@@ -25,6 +25,7 @@ export default forwardRef(function Jam(
             </div>
             <div>
                 <select
+                    {...props}
                     name={name}
                     id={id}
                     value={value}
@@ -32,9 +33,7 @@ export default forwardRef(function Jam(
                         `border-gray-300 focus:border-emerald-500 focus:ring-emerald-500 rounded-md shadow-sm w-full ` +
                         className
                     }
-                    ref={input}
-                    required={required}
-                    onChange={(e) => handleChange(e)}>
+                    ref={input}>
 
                     <option value="">Pilih Jam</option>
 
@@ -48,13 +47,14 @@ export default forwardRef(function Jam(
 
                 </select>
             </div>
-            {message ?
-                <div className='text-sm text-red-600'>
-                    {message}
-                </div>
-                :
-                null
+            {
+                message ?
+                    <div className='text-sm text-red-600'>
+                        {message}
+                    </div>
+                    :
+                    null
             }
-        </div>
+        </div >
     )
 });

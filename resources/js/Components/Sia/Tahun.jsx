@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useRef, useState } from 'react';
-import moment from 'moment'
+import dayjs from 'dayjs';
 
 export default forwardRef(function Tahun(
     { message, isFocused = false, className, ...props },
@@ -11,7 +11,7 @@ export default forwardRef(function Tahun(
 
     const arrayTahun = () => {
         let i;
-        for (i = 2022; i <= Number(moment(new Date()).format('YYYY')); i++) {
+        for (i = 2022; i <= Number(dayjs(new Date()).format('YYYY')); i++) {
             arrTahun.push({
                 id: i,
                 tahun: i

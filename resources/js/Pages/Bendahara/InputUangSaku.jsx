@@ -10,7 +10,7 @@ import getAllSiswa from '@/Functions/getAllSiswa'
 import getUangSaku from '@/Functions/getUangSaku'
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, useForm } from '@inertiajs/react'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -22,7 +22,7 @@ const InputUangSaku = ({ initTahun, initSemester }) => {
     const { data, setData, post, errors, processing, delete: destroy } = useForm({
         tahun: initTahun,
         semester: initSemester,
-        tanggal: moment(new Date()).format('YYYY-MM-DD'),
+        tanggal: dayjs(new Date()).format('YYYY-MM-DD'),
         jumlah: 0,
         keterangan: '',
         nis: ''

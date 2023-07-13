@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -11,6 +12,26 @@ class Siswa extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    /**
+     * Get the absensi that owns the Siswa
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function absensi(): BelongsTo
+    {
+        return $this->belongsTo(AbsensiSekolah::class, 'nis', 'nis')->withDefault();
+    }
+
+    /**
+     * Get all of the absensis for the Siswa
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function absensis(): HasMany
+    {
+        return $this->hasMany(AbsensiSekolah::class, 'nis', 'nis');
+    }
 
     /**
      * Get the alamat associated with the Siswa

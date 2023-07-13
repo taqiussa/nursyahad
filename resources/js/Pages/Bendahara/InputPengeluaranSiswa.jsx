@@ -10,7 +10,7 @@ import getAllSiswa from '@/Functions/getAllSiswa'
 import getPengeluaranSiswa from '@/Functions/getPengeluaranSiswa'
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, useForm } from '@inertiajs/react'
-import moment from 'moment/moment'
+import dayjs from 'dayjs'
 import React, { useEffect, useState } from 'react'
 import { trackPromise } from 'react-promise-tracker'
 import { toast } from 'react-toastify'
@@ -20,7 +20,7 @@ const InputPengeluaranSiswa = ({ initTahun, initSemester }) => {
     const { data, setData, post, errors, processing, delete: destroy } = useForm({
         tahun: initTahun,
         semester: initSemester,
-        tanggal: moment(new Date()).format('YYYY-MM-DD'),
+        tanggal: dayjs(new Date()).format('YYYY-MM-DD'),
         jumlah: 0,
         keterangan: '',
         nis: '',
@@ -201,7 +201,7 @@ const InputPengeluaranSiswa = ({ initTahun, initSemester }) => {
                         </tr>
                         <tr className="bg-slate-300 border-b">
                             <td className="py-2 px-2 font-bold text-lg text-slate-600" colSpan={4}>
-                                Total Akhir Bulan {namaBulan(moment(new Date(data.tanggal)).format('MM'))}
+                                Total Akhir Bulan {namaBulan(dayjs(new Date(data.tanggal)).format('MM'))}
                             </td>
                             <td className="py-2 px-2 font-bold text-lg text-slate-600" colSpan={4}>
                                 {rupiah(penjumlahan(listUangSaku, 'jumlah') - penjumlahan(listPengeluaran, 'jumlah'))}

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GetDataAbsensiController;
 use App\Http\Controllers\GetDataBendaharaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GetDataSiswaController;
@@ -8,6 +9,12 @@ use App\Http\Controllers\GetDataUangSakuController;
 use App\Http\Controllers\GetDataPengeluaranSiswaController;
 
 Route::middleware(['auth'])->group(function () {
+
+    // Route Get Data Absensi
+    Route::controller(GetDataAbsensiController::class)->group(function () {
+        Route::post('get-absensi-sekolah', 'get_absensi_sekolah')->name('get-absensi-sekolah');
+        Route::post('get-info-absensi-sekolah', 'get_info_absensi_sekolah')->name('get-info-absensi-sekolah');
+    });
 
     // Route Get Data Bendahara
     Route::controller(GetDataBendaharaController::class)->group(function () {
