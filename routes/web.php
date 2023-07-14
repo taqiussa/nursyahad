@@ -40,4 +40,5 @@ require __DIR__ . '/auth.php';
 require __DIR__ . '/bendahara.php';
 require __DIR__ . '/data.php';
 require __DIR__ . '/guru.php';
+require __DIR__ . '/siswa.php';
 require __DIR__ . '/tatausaha.php';

@@ -6,6 +6,7 @@ import SidebarAdmin from './Partials/SidebarAdmin';
 import SidebarTataUsaha from './Partials/SidebarTataUsaha';
 import SidebarBendahara from './Partials/SidebarBendahara';
 import SidebarGuru from './Partials/SidebarGuru';
+import SidebarSiswa from './Partials/SidebarSiswa';
 export default function Sidebar({ open, closeSide, auth }) {
     return (
         <div>
@@ -76,9 +77,9 @@ export default function Sidebar({ open, closeSide, auth }) {
 
                         :
                         <>
-                            {/* {auth.roles.includes('Siswa') &&
+                            {auth.roles.includes('Siswa') &&
                                 <SidebarSiswa closeSide={closeSide} />
-                            } */}
+                            }
                         </>
                     }
 
