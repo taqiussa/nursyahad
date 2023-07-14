@@ -18,6 +18,6 @@ class WajibBayarSekolah extends Model
      */
     public function gunabayar(): BelongsTo
     {
-        return $this->belongsTo(GunabayarSekolah::class)->withDefault();
+        return $this->belongsTo(GunabayarSekolah::class, 'gunabayar_id')->withDefault();
     }
 }

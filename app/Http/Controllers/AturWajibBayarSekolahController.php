@@ -25,12 +25,13 @@ class AturWajibBayarSekolahController extends Controller
     {
         $validate = request()->validate([
             'gunabayar_id' => 'required',
+            'tingkat' => 'required',
             'jumlah' => 'required',
             'tahun' => 'required'
         ]);
 
         $validate['jumlah'] = ambilAngka(request('jumlah'));
-        
+
         WajibBayarSekolah::create($validate);
 
         return to_route('atur-wajib-bayar-sekolah');

@@ -21,8 +21,7 @@ class AbsensiSekolahController extends Controller
             [
                 'initTahun' => $this->data_tahun(),
                 'initSemester' => $this->data_semester(),
-                'listKelas' => Kelas::orderBy('kategori_kelas_id')
-                    ->orderBy('nama')
+                'listKelas' => Kelas::orderBy('nama')
                     ->get(),
                 'listInfo' => AbsensiSekolah::whereTanggal(request('tanggal'))
                     ->whereKelasId(request('kelasId'))

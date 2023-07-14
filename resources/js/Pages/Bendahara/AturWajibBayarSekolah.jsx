@@ -3,7 +3,7 @@ import Gunabayar from '@/Components/Sia/Gunabayar'
 import Hapus from '@/Components/Sia/Hapus'
 import InputText from '@/Components/Sia/InputText'
 import Tahun from '@/Components/Sia/Tahun'
-import SimpanButton from '@/Components/SimpanButton'
+import Tingkat from '@/Components/Sia/Tingkat'
 import { maskRupiah, rupiah } from '@/Functions/functions'
 import getWajibBayarSekolah from '@/Functions/getWajibBayarSekolah'
 import AppLayout from '@/Layouts/AppLayout'
@@ -14,9 +14,11 @@ import { trackPromise } from 'react-promise-tracker'
 
 const AturWajibBayarSekolah = ({ initTahun, listGunabayar }) => {
 
-    const { data, setData, post,reset, errors, processing, delete: destroy } = useForm({
+    const { data, setData, post, reset, errors, processing, delete: destroy } = useForm({
         tahun: initTahun,
         gunabayar_id: '',
+        kategori_kelas_id: '',
+        tingkat: '',
         jumlah: 0,
         listWajibBayar: []
     })
@@ -59,6 +61,13 @@ const AturWajibBayarSekolah = ({ initTahun, listGunabayar }) => {
                         onChange={handleChange}
                     />
 
+                    <Tingkat
+                        name='tingkat'
+                        value={data.tingkat}
+                        message={errors.tingkat}
+                        onChange={handleChange}
+                    />
+
                     <Gunabayar
                         name='gunabayar_id'
                         value={data.gunabayar_id}
@@ -66,7 +75,6 @@ const AturWajibBayarSekolah = ({ initTahun, listGunabayar }) => {
                         onChange={handleChange}
                         listGunabayar={listGunabayar}
                     />
-
                     <InputText
                         name='jumlah'
                         value={data.jumlah}

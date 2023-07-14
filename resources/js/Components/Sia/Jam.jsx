@@ -39,9 +39,7 @@ export default forwardRef(function Jam(
 
                     <option value="1-2">1-2</option>
 
-                    <option value="3-4">3-4</option>
-
-                    <option value="5-6">5-6</option>
+                    <option value="3-6">3-6</option>
 
                     <option value="7-8">7-8</option>
 
