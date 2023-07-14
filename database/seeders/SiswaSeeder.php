@@ -306,6 +306,62 @@ class SiswaSeeder extends Seeder
                 'name' => 'Naylil Muna Ramadhani',
                 'nis' => '180009SVIE'
             ],
+            [
+                'name' => 'Achmad Benyamin Alfarobi',
+                'nis' => '230090KAIn'
+            ],
+            [
+                'name' => 'Akbar Arka Syahputra',
+                'nis' => '230091PKIn'
+            ],
+            [
+                'name' => 'Alfatunnissa Aqila Permadi',
+                'nis' => '230092MASE'
+            ],
+            [
+                'name' => 'Azril Maulana Rahmadiansyah',
+                'nis' => '230093PAIn'
+            ],
+            [
+                'name' => 'Faza Muhammad Alwaqi',
+                'nis' => '230094SAFI'
+            ],
+            [
+                'name' => 'Khaifa Sahsa Salsabilla',
+                'nis' => '230095SATI'
+            ],
+            [
+                'name' => 'Khafaa Nurunnisa',
+                'nis' => '230096PAFI'
+            ],
+            [
+                'name' => 'Kiona Adema Mahveen',
+                'nis' => '230097PATE'
+            ],
+            [
+                'name' => 'Muhammad Ardani Rosyad',
+                'nis' => '230098KASI'
+            ],
+            [
+                'name' => 'Muhammad Muzakki Al Ghani',
+                'nis' => '230099SAIE'
+            ],
+            [
+                'name' => 'Muhammad Nugroho Hafidz Al Farizi',
+                'nis' => '230100MATE'
+            ],
+            [
+                'name' => 'Nahda Syauqina Azzahra',
+                'nis' => '230101MAFI'
+            ],
+            [
+                'name' => 'Myesa Arsyila Alfatunisa',
+                'nis' => '230102KKSE'
+            ],
+            [
+                'name' => 'Syafika Fitri Hadiyanto',
+                'nis' => '230103PAII'
+            ]
         ];
 
         foreach ($students as $q) {
