@@ -26,6 +26,7 @@ Route::middleware(['auth'])->group(function () {
     // Route Get Data Siswa 
     Route::controller(GetDataSiswaController::class)->group(function () {
         Route::post('get-all-siswa', 'get_all_siswa')->name('get-all-siswa');
+        Route::post('get-all-siswa-keluar', 'get_all_siswa_keluar')->name('get-all-siswa-keluar');
     });
 
     // Route Get Data Pengeluaran Siswa

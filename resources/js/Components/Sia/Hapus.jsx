@@ -9,7 +9,7 @@ export default function Hapus({ id, destroy, routes, method }) {
     const handleDelete = (id) => {
         Sweet.fire({
             title: 'Anda yakin menghapus?',
-            text: "Hapus Pengeluaran Siswa!",
+            text: "Hapus Data!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Ya, Hapus!',
@@ -23,7 +23,7 @@ export default function Hapus({ id, destroy, routes, method }) {
                         }),
                         {
                             onSuccess: () => {
-                                toast.success('Berhasil Hapus Pengeluaran Siswa')
+                                toast.success('Berhasil Hapus Data')
                                 trackPromise(method())
                             }
                         })

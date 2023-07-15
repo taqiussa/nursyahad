@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Siswa;
+use App\Models\SiswaKeluar;
 
 class GetDataSiswaController extends Controller
 {
@@ -18,6 +19,22 @@ class GetDataSiswaController extends Controller
                 ])
                 ->get()
                 ->sortBy(['kelas.tingkat', 'kelas.nama', 'user.name'])
+                ->values()
+        ]);
+    }
+
+    public function get_all_siswa_keluar()
+    {
+        return response()->json([
+            'listSiswa' => SiswaKeluar::whereTahun(request('tahun'))
+                ->with([
+                    'alamat',
+                    'biodata',
+                    'kelas:id,nama',
+                    'user:nis,name'
+                ])
+                ->get()
+                ->sortBy(['kelas.nama', 'user.name'])
                 ->values()
         ]);
     }

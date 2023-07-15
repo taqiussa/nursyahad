@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AturKelasSiswaController;
+use App\Http\Controllers\AturSiswaKeluarController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataKelasController;
 use App\Http\Controllers\DataSiswaController;
+use App\Http\Controllers\DataSiswaKeluarController;
 use App\Http\Controllers\TambahKelasController;
 use App\Http\Controllers\TambahSiswaController;
 
@@ -19,6 +21,12 @@ Route::middleware([
         Route::post('atur-kelas-siswa', 'simpan')->name('atur-kelas-siswa.simpan');
     });
 
+    // Route Atur Siswa Keluar
+    Route::controller(AturSiswaKeluarController::class)->group(function () {
+        Route::get('atur-siswa-keluar', 'index')->name('atur-siswa-keluar');
+        Route::delete('atur-siswa-keluar', 'hapus')->name('atur-siswa-keluar.hapus');
+    });
+
     // Route Data Kelas
     Route::controller(DataKelasController::class)->group(function () {
         Route::get('data-kelas', 'index')->name('data-kelas');
@@ -26,7 +34,10 @@ Route::middleware([
     });
 
     // Route Data Siswa
-    Route::get('data-siswa', DataSiswaController::class)->name('data-siswa');/*  */
+    Route::get('data-siswa', DataSiswaController::class)->name('data-siswa');
+
+    // Route Data Siswa Keluar
+    Route::get('data-siswa-keluar', DataSiswaKeluarController::class)->name('data-siswa-keluar');
 
     // Route Tambah Kelas
     Route::controller(TambahKelasController::class)->group(function () {
