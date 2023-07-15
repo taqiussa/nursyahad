@@ -1,18 +1,16 @@
 import PrimaryButton from '@/Components/PrimaryButton'
 import InputText from '@/Components/Sia/InputText'
-import Kategori from '@/Components/Sia/Kategori'
 import Tingkat from '@/Components/Sia/Tingkat'
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, useForm } from '@inertiajs/react'
 import React from 'react'
 import { toast } from 'react-toastify'
 
-const TambahKelas = ({ listKategori }) => {
+const TambahKelas = () => {
 
     const { data, setData, post, errors, processing } = useForm({
         nama: '',
         tingkat: '',
-        kategoriKelasId: ''
     })
 
     const handleChange = (e) => {
@@ -50,15 +48,6 @@ const TambahKelas = ({ listKategori }) => {
                     value={data.tingkat}
                     message={errors.tingkat}
                     onChange={handleChange}
-                />
-
-                <Kategori
-                    name='kategoriKelasId'
-                    label='kelas'
-                    value={data.kategoriKelasId}
-                    message={errors.kategoriKelasId}
-                    onChange={handleChange}
-                    listKategori={listKategori}
                 />
 
             </div>
