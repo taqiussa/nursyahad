@@ -8,7 +8,7 @@ import dayjs from 'dayjs'
 import React from 'react'
 import { useEffect } from 'react'
 
-const KehadiranSekolah = ({ initTahun, listKehadiran }) => {
+const KehadiranSekolah = ({ initTahun, listKehadiran, listAbsensi }) => {
 
     const { data, setData } = useForm({
         tahun: initTahun,
@@ -22,7 +22,7 @@ const KehadiranSekolah = ({ initTahun, listKehadiran }) => {
     useEffect(() => {
         if (data.tahun && data.bulan) {
             router.reload({
-                only: ['listKehadiran'],
+                only: ['listKehadiran', 'listAbsensi'],
                 data: {
                     tahun: data.tahun,
                     bulan: data.bulan
@@ -61,13 +61,13 @@ const KehadiranSekolah = ({ initTahun, listKehadiran }) => {
                                 Hari, Tanggal
                             </th>
                             <th scope='col' className="py-3 px-2 text-left">
-                                Jam
+                                Jam 1-2
                             </th>
                             <th scope='col' className="py-3 px-2 text-left">
-                                Kehadiran
+                                Jam 3-6
                             </th>
                             <th scope='col' className="py-3 px-2 text-left">
-                                Guru
+                                Jam 7-8
                             </th>
                         </tr>
                     </thead>
@@ -81,13 +81,13 @@ const KehadiranSekolah = ({ initTahun, listKehadiran }) => {
                                     {hariTanggal(siswa.tanggal)}
                                 </td>
                                 <td className="py-2 px-2 font-medium text-slate-600">
-                                    {siswa.jam}
+                                    {listAbsensi && listAbsensi.filter(absen => absen.jam == '1-2' && absen.tanggal == siswa.tanggal).map(absen => (namaKehadiran(absen.kehadiran_id)))}
                                 </td>
                                 <td className="py-2 px-2 font-medium text-slate-600">
-                                    {namaKehadiran(siswa.kehadiran_id)}
+                                    {listAbsensi && listAbsensi.filter(absen => absen.jam == '3-6' && absen.tanggal == siswa.tanggal).map(absen => (namaKehadiran(absen.kehadiran_id)))}
                                 </td>
                                 <td className="py-2 px-2 font-medium text-slate-600">
-                                    {siswa.guru?.name}
+                                    {listAbsensi && listAbsensi.filter(absen => absen.jam == '7-8' && absen.tanggal == siswa.tanggal).map(absen => (namaKehadiran(absen.kehadiran_id)))}
                                 </td>
                             </tr>
                         ))}

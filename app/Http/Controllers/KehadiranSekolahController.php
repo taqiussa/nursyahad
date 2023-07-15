@@ -18,9 +18,14 @@ class KehadiranSekolahController extends Controller
             'Siswa/KehadiranSekolah',
             [
                 'initTahun' => $this->data_tahun(),
+                'listAbsensi' => AbsensiSekolah::whereMonth('tanggal', request('bulan'))
+                    ->whereNis(auth()->user()->nis)
+                    // ->with(['guru:id,name'])
+                    ->get(),
                 'listKehadiran' => AbsensiSekolah::whereMonth('tanggal', request('bulan'))
                     ->whereNis(auth()->user()->nis)
-                    ->with(['guru:id,name'])
+                    ->groupBy('tanggal')
+                    ->selectRaw('tanggal')
                     ->orderByDesc('tanggal')
                     ->get()
             ]
